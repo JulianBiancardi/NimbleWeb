@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Nimble Online</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" type="text/css" href="index.css"> 
+    </head>
+    <body>
+        <div id="initScene">
+            <label id="init_title">Nimble Online</label><br>
+
+            <label class="label_init">Lobby name</label>
+            <input type="text" id="in_lobby_name_join" class="in_init" maxlength="10"></input><br>
+            <label class="label_init">Player name</label>
+            <input type="text" id="in_player_name_join" class="in_init" maxlength="10" ></input><br>
+            <button onclick="join_lobby()">Join</button><br>
+        
+        
+            <label class="label_init">Player name</label>
+            <input type="text" id="in_player_name_create" class="in_init" maxlength="10"></input><br>
+            <button onclick="create_lobby()">Create</button><br>
+
+            <img src="resources/nimblegame.png" alt="Nimble card game"> 
+        </div>
+            
+        <div id="lobbyScene">
+            <label id="lobby_id">Lobby id</label>
+            <label id="lobby_number_players">Players</label>
+            <ul id="lobby_players"></ul>
+            <button onclick="start_game()">Start Game</button>
+        </div>
+
+        <script src='index.js'></script>
+    </body>
+</html>
