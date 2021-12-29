@@ -1,5 +1,4 @@
 const ws = new WebSocket("ws://3.129.207.140:8080/nimble");
-document.getElementById("lobbyScene").style.display = 'none'; //hide the lobby scene
 
 ws.addEventListener("open", () =>{
     console.log("We are connected");
@@ -7,7 +6,7 @@ ws.addEventListener("open", () =>{
 
 ws.addEventListener("message", ({data}) =>{
     const obj_message = JSON.parse(data);
-    _show_lobby(obj_message.id, obj_message.users);
+    //_show_lobby(obj_message.id, obj_message.users);
     console.log(obj_message);
 })
 
@@ -24,8 +23,6 @@ function create_lobby(){
     let player_name = document.getElementById("in_player_name_create").value;
     let message = {method:"create", name:player_name};
     ws.send(JSON.stringify(message));
-    document.getElementById("initScene").style.display = 'none'; //hide the init scene
-    document.getElementById("lobbyScene").style.display = 'block';
 }
 
 function start_game(){
@@ -34,6 +31,7 @@ function start_game(){
     ws.send(message);
 }
 
+/*
 function _show_lobby(id, users){
     let lobby_players = document.getElementById("lobby_players");
     document.getElementById("lobby_id").innerHTML = "Lobby id: " + id;
@@ -46,4 +44,4 @@ function _show_lobby(id, users){
         lobby_players.appendChild(listitem)
     });
 
-}
+}*/

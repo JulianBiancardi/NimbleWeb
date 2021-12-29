@@ -5,32 +5,47 @@
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Nimble Online</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel="stylesheet" type="text/css" href="index.css"> 
+        <link rel="stylesheet" type="text/css" href="styles/normalize.css"> 
+        <link rel="stylesheet" type="text/css" href="styles/index.css"> 
     </head>
     <body>
-        <div id="initScene">
-            <label id="init_title">Nimble Online</label><br>
-
+        <section class="header">
+            <div class="container">
+                <label class="init_title" id="title_n">n</label>
+                <label class="init_title" id="title_i">i</label>
+                <label class="init_title" id="title_m">M</label>
+                <label class="init_title" id="title_b">B</label>
+                <label class="init_title" id="title_l">l</label>
+                <label class="init_title" id="title_e">e</label>
+            </div>
+        </section>
+        <br>
+        <section id="join_settings">
             <label class="label_init">Lobby name</label>
-            <input type="text" id="in_lobby_name_join" class="in_init" maxlength="10"></input><br>
-            <label class="label_init">Player name</label>
-            <input type="text" id="in_player_name_join" class="in_init" maxlength="10" ></input><br>
-            <button onclick="join_lobby()">Join</button><br>
-        
-        
-            <label class="label_init">Player name</label>
-            <input type="text" id="in_player_name_create" class="in_init" maxlength="10"></input><br>
-            <button onclick="create_lobby()">Create</button><br>
-
-            <img src="resources/nimblegame.png" alt="Nimble card game"> 
-        </div>
-            
-        <div id="lobbyScene">
-            <label id="lobby_id">Lobby id</label>
-            <label id="lobby_number_players">Players</label>
-            <ul id="lobby_players"></ul>
-            <button onclick="start_game()">Start Game</button>
-        </div>
+            <input type="text" id="in_lobby_name_join" class="in_init" maxlength="10"></input>
+            <label class="create_settings_label">Player name</label>
+            <input type="text" id="in_player_name_create" class="in_init" maxlength="10"></input>
+            <button id="btn_join" onclick="join_lobby()">Join</button>
+        </section>
+        <br>
+        <section id="create_settings">
+            <label class="create_settings_label">Player name</label>
+            <input type="text" id="in_player_name_create" class="in_init" maxlength="10"></input>
+            <select name="Number of players">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <button id="btn_create" onclick="create_lobby()">Create</button>                  
+        </section>
+        <br>
+        <footer class="footer">
+            <label id="init_info">What is Nimble?</label><br>
+            <img id="nimble_image" src="resources/nimblegame.png" alt="Nimble card game"> 
+            <p id="nimble_info"> Nimble is a .....................................................</p>
+        </footer>
 
         <script src='index.js'></script>
     </body>
