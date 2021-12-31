@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Nimble Online</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" type="text/css" href="../styles/normalize.css"> 
+        <link rel="stylesheet" type="text/css" href="../styles/game.css"> 
+    </head>
+    <body>
+        
+        <div class="versus_container">
+            <h2>Other players</h2>
+            <ul id="players_versus"></ul>
+        </div>
+        <div class="board_container">
+            <button class="deck_board" id="deck_board1" onclick="onClickDeck1()">Deck1</button>
+            <button class="deck_board" id="deck_board2" onclick="onClickDeck2()">Deck2</button>
+            <button class="deck_board" id="deck_board3" onclick="onClickDeck3()">Deck3</button>
+        </div>
+        <br>
+        <button onclick="onClickDiscard()">Discard</button>
+        <div class="player">
+            <h2 id="player_name">{PlayerName}</h2>
+            <h2 id="hand_card">{Hand card}</h2>
+        </div>
+        <script src='../scripts/game.js'></script>
+    </body>
+</html>

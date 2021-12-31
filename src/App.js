@@ -6,20 +6,9 @@ import Lobby from './Lobby';
 import NotFoundPage from './NotFound.js';
 
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { WEBSOCKET_IP } from './constants.js';
-
+import Game from './Game.js';
 
 const App = () => {
-  let ws = new WebSocket(WEBSOCKET_IP); 
-
-  ws.addEventListener("open", () =>{
-    console.log("We are connected");
-  });
-
-  ws.addEventListener("message", ({data}) =>{
-      const obj_message = JSON.parse(data);
-      console.log(obj_message);
-  });
 
   return (
     <Router>
@@ -31,6 +20,9 @@ const App = () => {
           </Route>
           <Route exact path="/lobby">
             <Lobby />
+          </Route>
+          <Route exact path="/game">
+            <Game />
           </Route>
           <Route path="*">
             <NotFoundPage />
