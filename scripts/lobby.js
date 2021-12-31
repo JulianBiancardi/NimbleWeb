@@ -1,5 +1,4 @@
 const ws = new WebSocket("ws://3.129.207.140:8080/nimble");
-var my_name = "";
 
 ws.addEventListener("open", () =>{
     console.log("Al lobby pete");
@@ -18,11 +17,9 @@ ws.addEventListener("message", ({data}) =>{
         }else{
             console.log("no capo yo ya tengo mi llave");
         }
-    }else if(obj_message.method == "reconnect"){
-        my_name = obj_message.user.name;
-        sessionStorage.setItem("player_name",my_name);
     }
     else if(obj_message.method == "lobby_info"){
+        sessionStorage.setItem("player_id", obj_message.player_number);
         document.getElementById("lobby_id").innerHTML = obj_message.lobby_id;
         show_players(obj_message.users);
     }
@@ -52,11 +49,7 @@ function show_players(players){
     lobby_players.textContent = ''; //Eliminates the players from the list
     players.forEach(player => {
         let li = document.createElement("li");
-        if(player.name === my_name){
-            li.appendChild(document.createTextNode(player.name + " => this is me"));
-        }else{
-            li.appendChild(document.createTextNode(player.name));
-        }
+        li.appendChild(document.createTextNode(player.name));
         lobby_players.appendChild(li);
     });
 }

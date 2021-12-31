@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>Nimble Online</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" type="text/css" href="../styles/normalize.css"> 
+        <link rel="stylesheet" type="text/css" href="../styles/index.css"> 
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div>
+                    <label class="init_title" id="title_n">n</label>
+                    <label class="init_title" id="title_i">i</label>
+                    <label class="init_title" id="title_m">M</label>
+                    <label class="init_title" id="title_b">B</label>
+                    <label class="init_title" id="title_l">l</label>
+                    <label class="init_title" id="title_e">e</label>
+                </div>
+                <button id="btn_rules">Rules</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="landing_page_game">
+                <img id="nimble_image" src="../resources/nimblegame.png" alt="Nimble card game"> 
+            </div>
+            <div class="landing_page_settings">
+                <h1>Be quick</h1>
+                <div id="join_settings">
+                    <h5>Join</h5>
+                    <label class="label_init">Lobby name</label>
+                    <input type="text" id="lobby_name_join" class="in_init" maxlength="4"></input>
+                    <label class="create_settings_label">Player name</label>
+                    <input type="text" id="player_name_join" class="in_init" maxlength="10"></input>
+                    <button id="btn_join" onclick="join_lobby()">Join</button>
+                    <label class="error_message" id="join_error"></label> 
+                </div>
+                <div id="create_settings">
+                    <h5>Create room</h5>
+                    <label class="create_settings_label">Player name</label>
+                    <input type="text" id="player_name_create" class="in_init" maxlength="10" onchange="btn_create_status(this)"></input>
+                    <button id="btn_create" onclick="create_lobby()">Create</button>
+                    <label class="error_message" id="create_error"></label> 
+                </div>
+            </div>
+        </main>
+    
+        <footer class="footer">
+            <label id="init_info">What is Nimble?</label><br>
+            <p id="nimble_info"> Nimble is a .....................................................</p>
+        </footer>
+
+        <script src='../scripts/index.js'></script>
+    </body>
+</html>
