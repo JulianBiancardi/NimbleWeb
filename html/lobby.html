@@ -5,15 +5,22 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Nimble Online</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="../styles/normalize.css"> 
+    <link rel="stylesheet" type="text/css" href="../styles/lobby.css"> 
 </head>
 <body>
     <h2>Lobby code: </h2>
     <label id="lobby_id"></label>
 
     <h2>Players: </h2>
-    <ul id="lobby_players"></ul>
+    <div id="lobby_players">
+        <div>
+            <img id="img_user" src="../resources/img_user.png"> 
+            <h5>Name</h5>
+        </div>
+    </div>
 
-    <button id="btn_start" onclick="onClickStartGame()">Start</button>
-    <script src='../scripts/lobby.js'></script>
+    <button id="btn_start" disabled="true">Start</button>
+    <script type="module" src='../scripts/lobby.js'></script>
 </body>
 </html>

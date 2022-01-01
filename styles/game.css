@@ -1,8 +1,28 @@
 
 .deck_board{
-    padding-top: 100px;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 100px;
+
+}
+
+.card{
+    background-color: aqua;
+    width: 150px;
+    height: 200px;
+    margin: 10px;
     border-radius: 8px;
+}
+.inner_container{
+    height: 80px;
+    width: 80px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+#bad{
+    margin-left: 35px;
+    margin-top: 60px;
+}
+
+.player_container{
+    display: inline-block;
 }

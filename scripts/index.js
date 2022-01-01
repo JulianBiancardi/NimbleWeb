@@ -1,17 +1,28 @@
-const ws = new WebSocket("ws://3.129.207.140:8080/nimble");
+import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH} from './constants.js';
+
+
+document.getElementById("lobby_name_join").setAttribute("maxlength", LOBBY_LENGTH);
+document.getElementById("player_name_join").setAttribute("maxlength", MAX_NAME_LENGTH);
+document.getElementById("player_name_create").setAttribute("maxlength", MAX_NAME_LENGTH);
+
+//Handlers for buttons
+document.getElementById("btn_join").addEventListener("click", onClickJoin);
+document.getElementById("btn_create").addEventListener("click", onClickCreate);
+
+const ws = new WebSocket(WEBSOCKET_IP);
 
 ws.addEventListener("open", () =>{
-    console.log("We are connected in login page");
 })
-
+ws.addEventListener("close", () =>{
+    console.log("Connection closed :(");
+})
 ws.addEventListener("message", ({data}) =>{
     const obj_message = JSON.parse(data);
     console.log(obj_message);
-    if(obj_message.method == "session_share"){
-        sessionStorage.setItem("session_id", obj_message.session_id);
-        console.log(sessionStorage.getItem("session_id"));
-    }else if(obj_message.method == "operation_status"){
-        if(obj_message.status == "success"){
+    if(obj_message.method == METHODS.SESSION_SHARE){
+        sessionStorage.setItem(SESSION_ID, obj_message.session_id);
+    }else if(obj_message.method == METHODS.OPERATION_STATUS){
+        if(obj_message.status == SUCCESS){
             window.location.href = "lobby.html";
         }else{
             document.getElementById("join_error").innerHTML = obj_message.description;
@@ -20,47 +31,37 @@ ws.addEventListener("message", ({data}) =>{
     }
 })
 
-ws.addEventListener("close", () =>{
-    console.log("Connection closed :(");
-
-})
-
 
 function isValidName(name){
-    return (name.trim != "" && name.length > 4);
+    return (name.trim != "");
 }
 
-function join_lobby(){
+
+function onClickJoin(){
     console.log("Join the lobby...");
     let lobby_name = document.getElementById("lobby_name_join").value;
     let player_name = document.getElementById("player_name_join").value;
 
     
     if(!isValidName(player_name)){
-        document.getElementById("join_error").innerHTML = "Not valid player name";
+        document.getElementById("join_error").innerHTML = ERROR_NAME;
         return;
     }
 
-    let message = {method:"join", lobby_id:lobby_name, name:player_name, session_id:sessionStorage.getItem("session_id")};
+    let message = {method:METHODS.JOIN, lobby_id:lobby_name, name:player_name, session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 
-function create_lobby(){
+function onClickCreate(){
     console.log("Creating the lobby...");
     let player_name = document.getElementById("player_name_create").value;
 
     if(!isValidName(player_name)){
-        document.getElementById("create_error").innerHTML = "Not valid player name";
+        document.getElementById("create_error").innerHTML = ERROR_NAME;
         return;
     }
 
-    let message = {method:"create", name:player_name, session_id:sessionStorage.getItem("session_id")};
+    let message = {method:METHODS.CREATE, name:player_name, session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
-}
-
-
-function btn_create_status(player_name_input){
-    let btn_create = document.getElementById("btn_create");
-    btn_create.disable = isValidName(player_name_input.value);
 }
 

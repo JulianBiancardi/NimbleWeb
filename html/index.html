@@ -32,17 +32,17 @@
                 <div id="join_settings">
                     <h5>Join</h5>
                     <label class="label_init">Lobby name</label>
-                    <input type="text" id="lobby_name_join" class="in_init" maxlength="4"></input>
+                    <input type="text" id="lobby_name_join" class="in_init"></input>
                     <label class="create_settings_label">Player name</label>
-                    <input type="text" id="player_name_join" class="in_init" maxlength="10"></input>
-                    <button id="btn_join" onclick="join_lobby()">Join</button>
+                    <input type="text" id="player_name_join" class="in_init"></input>
+                    <button id="btn_join">Join</button>
                     <label class="error_message" id="join_error"></label> 
                 </div>
                 <div id="create_settings">
                     <h5>Create room</h5>
                     <label class="create_settings_label">Player name</label>
-                    <input type="text" id="player_name_create" class="in_init" maxlength="10" onchange="btn_create_status(this)"></input>
-                    <button id="btn_create" onclick="create_lobby()">Create</button>
+                    <input type="text" id="player_name_create" class="in_init"></input>
+                    <button id="btn_create">Create</button>
                     <label class="error_message" id="create_error"></label> 
                 </div>
             </div>
@@ -53,6 +53,6 @@
             <p id="nimble_info"> Nimble is a .....................................................</p>
         </footer>
 
-        <script src='../scripts/index.js'></script>
+        <script type="module" src='../scripts/index.js'></script>
     </body>
 </html>
