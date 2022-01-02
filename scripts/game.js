@@ -59,7 +59,7 @@ function update_game(game_state, users){
 
     //Get the player name
     let player_id = sessionStorage.getItem(PLAYER_ID);
-    document.getElementById("player_name").innerHTML = users[player_id].name;
+    document.getElementById("player_name").innerHTML = users[player_id].name + "(" + game_state.players[player_id].total_cards + ")";
 
     //Get the player hand
     let hand_card = game_state.players[player_id].hand_card;
@@ -84,9 +84,8 @@ function update_game(game_state, users){
             let container = document.createElement("div");
             container.classList.add("player_container");
             container.innerHTML = `
-                <h5>${users[id].name}
+                <h2>${users[id].name} (${game_state.players[id].total_cards})</h2>
                 <img id="img_user" src="../resources/img_user.png"> 
-                <h4>${versus_hand_card.outer_color}(${versus_hand_card.inner_color})</h4>
             `;
             fragment.appendChild(container);  
         }

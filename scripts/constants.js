@@ -5,7 +5,7 @@ export const WEBSOCKET_IP = WEBSOCKET_HEADER + SERVER_IP;
 
 
 //Pages constants
-const HTTP_HEADER = "http//";
+const HTTP_HEADER = "http://";
 const DOMAIN_ARG = "nimble.jpmiceli.com.ar";
 export const INDEX_PAGE = HTTP_HEADER + DOMAIN_ARG;
 export const LOBBY_PAGE = HTTP_HEADER + DOMAIN_ARG + "/html/lobby.html";
