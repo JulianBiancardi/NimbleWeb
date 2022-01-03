@@ -1,4 +1,4 @@
-import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND} from './constants.js';
+import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_deckboard1").addEventListener("click", onClickDeck1);
@@ -21,7 +21,7 @@ ws.addEventListener("message", ({data}) =>{
     console.log(obj_message);
     if(obj_message.method == METHODS.SESSION_SHARE){
         if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.href = "index.html";
+            window.location.replace("index.html");
         }else{
             console.log("no capo yo ya tengo mi llave");
         }
@@ -32,6 +32,7 @@ ws.addEventListener("message", ({data}) =>{
         update_game(obj_message.game, obj_message.users);
     }else if(obj_message.method == METHODS.WINNER){
         show_winner(obj_message);
+        setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
     }
 })
 

@@ -41,4 +41,21 @@ export const FROM_DISCARD = "discard";
 //Status constants
 export const SUCCESS = "success";
 export const ERROR_NAME = "Not valid player name";
+export const ERROR_LOBBY = "Lobby name is not valid";
 export const ERROR_START = "Error start game";
+
+
+//Time constants
+export const SEG = 1000;
+
+
+//Game constants
+const colors = {
+    0: '#f73939',
+    1: '#9b39f7',
+    2: 'blue',
+    4: 'yellow',
+}
+export function getColor(id){
+    return colors[id];
+}

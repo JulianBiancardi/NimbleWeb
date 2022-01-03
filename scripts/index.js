@@ -1,4 +1,4 @@
-import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH} from './constants.js';
+import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH, ERROR_LOBBY, SEG} from './constants.js';
 
 
 document.getElementById("lobby_name_join").setAttribute("maxlength", LOBBY_LENGTH);
@@ -23,28 +23,23 @@ ws.addEventListener("message", ({data}) =>{
         sessionStorage.setItem(SESSION_ID, obj_message.session_id);
     }else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
-            window.location.href = "lobby.html";
+            window.location.replace("lobby.html");
         }else{
-            document.getElementById("join_error").innerHTML = obj_message.description;
-            document.getElementById("create_error").innerHTML = obj_message.description;
+            document.getElementById("error_message").innerHTML = obj_message.description;
+            document.querySelector(".error_container").style.display = 'block';
         }
     }
 })
-
-
-function isValidName(name){
-    return (name.trim != "");
-}
 
 
 function onClickJoin(){
     console.log("Join the lobby...");
     let lobby_name = document.getElementById("lobby_name_join").value;
     let player_name = document.getElementById("player_name_join").value;
-
     
-    if(!isValidName(player_name)){
-        document.getElementById("join_error").innerHTML = ERROR_NAME;
+    if(player_name === ""){
+        document.getElementById("error_message").innerHTML = ERROR_NAME;
+        document.querySelector(".error_container").style.display = 'block';
         return;
     }
 
@@ -56,8 +51,9 @@ function onClickCreate(){
     console.log("Creating the lobby...");
     let player_name = document.getElementById("player_name_create").value;
 
-    if(!isValidName(player_name)){
-        document.getElementById("create_error").innerHTML = ERROR_NAME;
+    if(player_name === ""){
+        document.getElementById("error_message").innerHTML = ERROR_NAME;
+        document.querySelector(".error_container").style.display = 'block';
         return;
     }
 

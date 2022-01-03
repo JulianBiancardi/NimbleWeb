@@ -9,18 +9,35 @@
     <link rel="stylesheet" type="text/css" href="../styles/lobby.css"> 
 </head>
 <body>
-    <h2>Lobby code: </h2>
-    <label id="lobby_id"></label>
+    <main>
+        <div class="main_container">
+            <div class="lobby_info_container">
+                <h2>Lobby code: </h2>
+                <label id="lobby_id"></label>
+                
+                <p>Copy and share this link to invite other players:</p>
+                <input id="lobby_id_invite" readonly="true"></input>
+                <button class="btn_settings" id="btn_copy">Copy</button>
+            </div>
 
-    <h2>Players: </h2>
-    <div id="lobby_players">
-        <div>
-            <img id="img_user" src="../resources/img_user.png"> 
-            <h5>Name</h5>
+            <div class="lobby_players_container">
+                <h2>Players: </h2>
+                <div id="lobby_players">
+                    
+                    <div>
+                        <img id="img_user" src="../resources/img_user.png"> 
+                        <h5>Name</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings_container">
+                <button class="btn_settings" id="btn_start" disabled="true">Start</button>
+                <button class="btn_settings" id="btn_leave">Leave</button>
+            </div>
+           
         </div>
-    </div>
-
-    <button id="btn_start" disabled="true">Start</button>
+    </main>
     <script type="module" src='../scripts/lobby.js'></script>
 </body>
 </html>

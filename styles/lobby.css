@@ -1,5 +1,89 @@
+body{
+    font-family: gilory,sans-serif;
+    font-size: 18px;
+    color: #4d4d4d;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; 
+    height: 100%;
+    background-color: #bfedf8;
+}
 
+button{
+    cursor: pointer;
+}
+
+main{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.main_container{
+    max-width: 1340px;
+    margin: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.lobby_info_container{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
+}
+
+#lobby_id{
+    font-weight: bold;
+    color: #f78a38;
+}
+
+.lobby_players_container{
+    padding: 10px;
+    margin: 10px;
+}
 
 .player_container{
     display: inline-block;
+    width: 140px;
+    height: 180px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    font-size: 20px;
+    color: #ecf0f1;
+    border-radius: 10px;
+    background-color: #9b39f7;
+    filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
+}
+
+.settings_container{
+    text-align: right;
+}
+.btn_settings{
+    width:150px;
+    height:50px;
+    border: none;
+    border-radius:8px;
+    font-size:25px;
+    font-weight:bold;
+    color:#fff;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn_start{
+    background-color: #f78a38;
+}
+#btn_start:hover{
+    background-color: #f06800;
+}
+#btn_copy{
+    background-color: #f78a38;
+}
+#btn_copy:hover{
+    background-color: #f06800;
 }

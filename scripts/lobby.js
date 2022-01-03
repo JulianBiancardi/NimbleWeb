@@ -1,7 +1,8 @@
-import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP} from './constants.js';
+import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_start").addEventListener("click", onClickStartGame);
+document.getElementById("btn_leave").addEventListener("click", onClickLeave);
 
 const ws = new WebSocket(WEBSOCKET_IP);
 
@@ -19,7 +20,7 @@ ws.addEventListener("message", ({data}) =>{
     console.log(obj_message);
     if(obj_message.method == METHODS.SESSION_SHARE){
         if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.href = "index.html";
+            window.location.replace("index.html");
         }else{
             console.log("no capo yo ya tengo mi llave");
         }
@@ -30,7 +31,7 @@ ws.addEventListener("message", ({data}) =>{
     }
     else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
-            window.location.href = "game.html";
+            window.location.replace("game.html");
         }else{
             console.log(ERROR_START);
         }
@@ -41,6 +42,11 @@ ws.addEventListener("message", ({data}) =>{
 function onClickStartGame(){
     let message = {method:METHODS.START, session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
+}
+
+function onClickLeave(){
+    console.log("Leaving");
+    window.location.replace("index.html");
 }
 
 function show_lobby(lobby_info){
@@ -58,17 +64,17 @@ function show_players(players){
     //in a for loop because the DOM is refreshed every time.
     const fragment = document.createDocumentFragment();
 
-    players.forEach(player => {
+    for(let id = 0; id < players.length; id++){
         let container = document.createElement("div");
         container.classList.add("player_container");
+        container.style.backgroundColor =  getColor(id);
         container.innerHTML = `
             <img id="img_user" src="../resources/img_user.png"> 
-            <h5>${player.name}</h5>
+            <h5>${players[id].name}</h5>
         `;
         //container.appendChild(document.createTextNode(player.name));
         fragment.appendChild(container);
-    });
-
+    }
     lobby_players.appendChild(fragment);
 
     //Enable the start button only for the owner
