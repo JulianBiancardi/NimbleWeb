@@ -50,12 +50,25 @@ export const SEG = 1000;
 
 
 //Game constants
-const colors = {
-    0: '#f73939',
-    1: '#9b39f7',
-    2: 'blue',
-    4: 'yellow',
+const players_colors = {
+    0: '#ab3a45',
+    1: '#582642',
+    2: '#4e7971',
+    3: '#dd844c',
 }
 export function getColor(id){
-    return colors[id];
+    return players_colors[id];
+}
+
+const card_colors = {
+    'RED': '#ab3a45',
+    'BLUE': '#bfe1e6',
+    'GREEN': '#4e7971',
+    'YELLOW':'#e8d2b3',
+    'PURPLE': '#582642',
+    'ORANGE': '#dd844c',
+}
+
+export function getCardColor(key){
+    return card_colors[key];
 }

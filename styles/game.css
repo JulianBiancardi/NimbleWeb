@@ -1,28 +1,132 @@
+body{
+    font-family: gilory,sans-serif;
+    font-size: 18px;
+    color: #4d4d4d;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; 
+    height: 100%;
+    background-color: #bfedf8;
+}
 
-.deck_board{
+button{
+    cursor: pointer;
+}
 
+main{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.main_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1340px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.players_versus_container{
+    display: flex;
+    flex-direction: row;
+}
+
+.board_container{
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 10px;
+    border: #4d4d4d;
+    background-color: #996b3f;
+    filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
+}
+.decks_container{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .card{
-    background-color: aqua;
-    width: 150px;
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 150px;
     margin: 10px;
-    border-radius: 8px;
+    border-radius: 10px;
+    border-width: 10px;
+    border: #bfedf8;
+    color: white;
+    background-color: #942121;
+    filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
 }
+
 .inner_container{
     height: 80px;
     width: 80px;
     background-color: #bbb;
     border-radius: 50%;
-    display: inline-block;
-}
-
-#bad{
-    margin-left: 35px;
-    margin-top: 60px;
 }
 
 .player_container{
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,.05);
+}
+.cards_container{
+    display: flex;
+    flex-direction: row;
+}
+
+.player{
+    text-align: center;
+}
+.player h2{
+    font-size: 18px;
+}
+#img_user{
+    width: 60px;
+}
+
+
+.modal_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    background-color: rgba(0,0,0,.3);
+}
+.modal_container.show{ 
+    opacity: 1;
+}
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 600px;
+    max-width: 100%;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
 }

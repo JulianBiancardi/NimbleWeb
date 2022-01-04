@@ -9,35 +9,52 @@
         <link rel="stylesheet" type="text/css" href="../styles/game.css"> 
     </head>
     <body>
-        
-        <div class="versus_container">
-            <div id="players_versus">
+        <main>
+            <div class="main_container">
+                <div class="players_versus_container">
+                </div>
+                <div class="board_container">
+                    <div class="decks_container">
+                        <button class="deck_board, card" id="btn_deckboard1">
+                            <span class="inner_container"></span>
+                        </button>
+                        <button class="deck_board, card" id="btn_deckboard2">
+                            <span class="inner_container"></span>
+                        </button>
+                        <button class="deck_board, card" id="btn_deckboard3">
+                            <span class="inner_container"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="player_container">
+                    <div class="player">
+                        <div class="cards_container">
+                            <div class="deck_hand_container">
+                                <div class="card">
+                                    <label id="total_cards">30</label>
+                                </div>
+                            </div>
+                            <div class="card" id="hand_card">
+                                <span class="inner_container" id="bad"></span>
+                            </div>
+                        </div>
+                        <img id="img_user" src="../resources/img_user.png"> 
+                        <h2 id="player_name">{PlayerName} (XX)</h2>
+                    </div>
+                    <button id="btn_discard">Discard</button>
+                    <div class="winner">
+                        <h2 id="winner_name"></h2>
+                    </div>
+                </div>
+                <div class="modal_container">
+                    <div class="modal">
+                        <img  src="../resources/img_user.png"> 
+                        <label id="modal_player_name">{PlayerName} Won the game!</label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="board_container">
-            <button class="deck_board, card" id="btn_deckboard1">
-                <span class="inner_container"></span>
-            </button>
-            <button class="deck_board, card" id="btn_deckboard2">
-                <span class="inner_container"></span>
-            </button>
-            <button class="deck_board, card" id="btn_deckboard3">
-                <span class="inner_container"></span>
-            </button>
-        </div>
-        <br>
-        <button id="btn_discard">Discard</button>
-        <div class="player">
-            <div class="card" id="hand_card">
-                <span class="inner_container" id="bad"></span>
-            </div>
-            <img id="img_user" src="../resources/img_user.png"> 
-            <h2 id="player_name">{PlayerName} (XX)</h2>
-        </div>
-        <br>
-        <div class="winner">
-            <h2 id="winner_name"></h2>
-        </div>
+
+        </main>
         <script type="module" src='../scripts/game.js'></script>
     </body>
 </html>

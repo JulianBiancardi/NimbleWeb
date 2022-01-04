@@ -1,4 +1,4 @@
-import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor} from './constants.js';
+import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, LOBBY_PAGE} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_start").addEventListener("click", onClickStartGame);
@@ -28,6 +28,7 @@ ws.addEventListener("message", ({data}) =>{
     else if(obj_message.method == METHODS.LOBBY_INFO){
         sessionStorage.setItem(PLAYER_ID, obj_message.player_number);
         show_lobby(obj_message);
+        show_players(obj_message.users);
     }
     else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
@@ -52,7 +53,9 @@ function onClickLeave(){
 function show_lobby(lobby_info){
     //Show the lobby code
     document.getElementById("lobby_id").innerHTML = lobby_info.lobby_id;
-    show_players(lobby_info.users);
+
+    //Updates the lobby code for copy link
+    document.getElementById("lobby_id_invite").value = LOBBY_PAGE + "/?lobby_id=" + lobby_info.lobby_id;
 }
 function show_players(players){
     let lobby_players = document.getElementById("lobby_players");

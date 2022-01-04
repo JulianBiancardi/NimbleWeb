@@ -64,9 +64,12 @@ footer{
 }
 .landing_page_game{
     max-width: 400px;
+    padding: 20px;
     margin-left: auto;
     margin-right: auto;
     align-self: center;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,.05);
 }
 .landing_page_settings{
     margin-left: auto;
@@ -158,7 +161,7 @@ footer{
     border-width: 2px;
     border-radius: 8px;
     border-style: solid;
-    background-color: #ffeece;
+    background-color: #e8d2b3;
     border-color: #705000;
     color: #705000;
 }
@@ -167,7 +170,7 @@ footer{
     border-width: 2px;
     border-radius: 8px;
     border-style: solid;
-    background-color: #ffb429;
+    background-color: #dd844c;
     border-color: #705000;
     color: #ffeece;
 }
@@ -185,7 +188,7 @@ footer{
     border-width: 2px;
     border-radius: 8px;
     border-style: solid;
-    background-color: #ca004e;
+    background-color: #ab3a45;
     border-color: rgb(94, 0, 16);
     color: #ffdce8;
 }
@@ -204,8 +207,8 @@ footer{
     border-radius: 8px;
     border-style: solid;
     background-color: #b359c5;
-    border-color: #7b0992;
-    color: #7b0992;
+    border-color: #582642;
+    color: #582642;
 }
 .init_title{
     font-size: 80px;

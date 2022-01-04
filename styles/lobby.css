@@ -9,6 +9,9 @@ body{
     background-color: #bfedf8;
 }
 
+h2{
+    display: inline-block;
+}
 button{
     cursor: pointer;
 }
@@ -28,7 +31,7 @@ main{
 }
 
 .lobby_info_container{
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
     border-radius: 10px;
     background-color: #ffffff;
@@ -37,12 +40,17 @@ main{
 
 #lobby_id{
     font-weight: bold;
-    color: #f78a38;
+    color: #dd844c;
 }
 
+#lobby_id_invite{
+    width: 500px;
+}
 .lobby_players_container{
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,.05);
 }
 
 .player_container{

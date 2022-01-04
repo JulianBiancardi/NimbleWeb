@@ -1,4 +1,4 @@
-import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG} from './constants.js';
+import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG, getCardColor} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_deckboard1").addEventListener("click", onClickDeck1);
@@ -32,7 +32,6 @@ ws.addEventListener("message", ({data}) =>{
         update_game(obj_message.game, obj_message.users);
     }else if(obj_message.method == METHODS.WINNER){
         show_winner(obj_message);
-        setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
     }
 })
 
@@ -56,45 +55,66 @@ function onClickDiscard(){
     ws.send(JSON.stringify(message));
 }
 
+function renderCard(card_view, card_info){
+    card_view.style.backgroundColor = getCardColor(card_info.outer_color);
+    card_view.firstElementChild.style.backgroundColor = getCardColor(card_info.inner_color);
+    card_view.style.border = getCardColor(card_info.inner_color);
+}
+
 function update_game(game_state, users){
 
     //Get the player name
     let player_id = sessionStorage.getItem(PLAYER_ID);
-    document.getElementById("player_name").innerHTML = users[player_id].name + "(" + game_state.players[player_id].total_cards + ")";
+    document.getElementById("total_cards").innerHTML = game_state.players[player_id].total_cards;
+    document.getElementById("player_name").innerHTML = users[player_id].name;
 
     //Get the player hand
     let hand_card = game_state.players[player_id].hand_card;
-    document.getElementById("hand_card").style.backgroundColor = hand_card.outer_color;
-    document.getElementById("hand_card").firstElementChild.style.backgroundColor = hand_card.inner_color;
+    let hand_card_view =  document.getElementById("hand_card");
+    renderCard(hand_card_view,hand_card);
 
     //Show the decks board
     for(let i = 0; i < game_state.decks_board.length ;i++){
-        let deck_board = document.getElementById("btn_deckboard" + (i + 1));
-        let deck_board_info = game_state.decks_board[i].top_card;
-        deck_board.style.backgroundColor = deck_board_info.outer_color;
-        deck_board.firstElementChild.style.backgroundColor = deck_board_info.inner_color;
+        let deck_board = game_state.decks_board[i].top_card;
+        let deck_board_view = document.getElementById("btn_deckboard" + (i + 1));
+        renderCard(deck_board_view,deck_board);
     }
 
     //Show the other players
-    let players_versus = document.getElementById("players_versus");
+    let players_versus = document.querySelector(".players_versus_container");
     players_versus.textContent = '';
     let fragment = document.createDocumentFragment();
     for(let id = 0; id < users.length ;id++){
         if(id != player_id){
-            let versus_hand_card = game_state.players[id].hand_card;
             let container = document.createElement("div");
             container.classList.add("player_container");
             container.innerHTML = `
-                <h2>${users[id].name} (${game_state.players[id].total_cards})</h2>
-                <img id="img_user" src="../resources/img_user.png"> 
+                <div class="player">
+                    <h2 id="player_name">${users[id].name} (${game_state.players[id].total_cards})</h2>
+                    <img id="img_user" src="../resources/img_user.png"> 
+                    <div class="cards_container">
+                        <div class="card" id="versus_hand_card${id}">
+                            <span class="inner_container" id="bad"></span>
+                        </div>
+                    </div>
+                </div>
             `;
-            fragment.appendChild(container);  
+            fragment.appendChild(container); 
+            let versus_hand_card = game_state.players[id].hand_card;
+            let versus_hand_card_view = fragment.getElementById("versus_hand_card" + id);
+            renderCard(versus_hand_card_view,versus_hand_card);
         }
     }
     players_versus.appendChild(fragment);
 }
 
 function show_winner(message){
-    document.getElementById("winner_name").innerHTML = message.user.name + " won the game!";
+    document.getElementById("modal_player_name").innerHTML = message.user.name + " Won the game!";
+    document.getElementById("btn_deckboard1").disabled = true;
+    document.getElementById("btn_deckboard2").disabled = true;
+    document.getElementById("btn_deckboard3").disabled = true;
+    document.getElementById("btn_discard").disabled = true;
+    setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
+    document.querySelector(".modal_container").classList.add("show");
 }
 
