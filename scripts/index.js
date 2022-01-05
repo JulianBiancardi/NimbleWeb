@@ -1,4 +1,4 @@
-import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH, ERROR_LOBBY, SEG} from './constants.js';
+import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH, LOBBY_PAGE} from './constants.js';
 
 
 document.getElementById("lobby_name_join").setAttribute("maxlength", LOBBY_LENGTH);
@@ -25,21 +25,31 @@ ws.addEventListener("message", ({data}) =>{
         if(obj_message.status == SUCCESS){
             window.location.replace("lobby.html");
         }else{
-            document.getElementById("error_message").innerHTML = obj_message.description;
-            document.querySelector(".error_container").style.display = 'block';
+            showError(obj_message.description);
         }
     }
 })
 
 
+function showError(message){
+    document.getElementById("error_message").innerHTML = message;
+    document.querySelector(".error_container").style.display = 'block';
+
+    let loader = document.querySelector(".loader");
+    //Disable the loader only if it is active
+    if(loader.style.display === "block"){
+        loader.style.display = "none";
+    }
+
+    return;
+}
+
 function onClickJoin(){
-    console.log("Join the lobby...");
     let lobby_name = document.getElementById("lobby_name_join").value;
     let player_name = document.getElementById("player_name_join").value;
     
     if(player_name === ""){
-        document.getElementById("error_message").innerHTML = ERROR_NAME;
-        document.querySelector(".error_container").style.display = 'block';
+        showError(ERROR_NAME);
         return;
     }
 
@@ -48,12 +58,11 @@ function onClickJoin(){
 }
 
 function onClickCreate(){
-    console.log("Creating the lobby...");
+    document.querySelector(".loader").style.display = 'block';
     let player_name = document.getElementById("player_name_create").value;
 
     if(player_name === ""){
-        document.getElementById("error_message").innerHTML = ERROR_NAME;
-        document.querySelector(".error_container").style.display = 'block';
+        showError(ERROR_NAME);
         return;
     }
 

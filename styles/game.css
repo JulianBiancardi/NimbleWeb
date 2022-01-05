@@ -56,23 +56,47 @@ main{
 
 .card{
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 150px;
+    width: 120px;
+    height: 170px;
+    padding: 5px;
     margin: 10px;
     border-radius: 10px;
     border-width: 10px;
     border: #bfedf8;
+    font-size: 30px;
     color: white;
     background-color: #942121;
     filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
 }
+.deck_board:hover{
+   animation: select 0.2s forwards;
+}
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+@keyframes select {
+    to{
+        scale: 1.2;
+    }
+}
 
 .inner_container{
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     background-color: #bbb;
     border-radius: 50%;
 }
@@ -83,7 +107,7 @@ main{
     padding: 20px;
     margin: 0 10px;
     border-radius: 10px;
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0,0,0,.2);
 }
 .cards_container{
     display: flex;
@@ -96,10 +120,31 @@ main{
 .player h2{
     font-size: 18px;
 }
-#img_user{
+.img_user{
     width: 60px;
 }
 
+.control_btn{
+    align-self: center;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    background-color: #747474;
+}
+.control_btn:hover{
+    background-color: #525252;
+}
+.control_btn#btn_discard{
+    background-image: url('/resources/IMG_discard.png');
+}
+
+.control_btn#btn_move_deck{
+    background-image: url('/resources/IMG_movedeck.png');
+}
 
 .modal_container{
     display: flex;

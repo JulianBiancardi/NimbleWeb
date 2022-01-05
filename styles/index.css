@@ -8,6 +8,11 @@ body{
     background-color: #bfedf8;
 }
 
+.hcontainer{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
 button{
     cursor: pointer;
 }
@@ -34,7 +39,8 @@ main{
     
 }
 footer{
-    position: absolute;
+    position: fixed;
+    left: 0;
     bottom: 0;
     padding: 5px 0;
     height: 50px;
@@ -104,24 +110,21 @@ footer{
     font-style: none;
     font-weight: normal;
 }
+#lobby_name_join{
+    text-transform: uppercase;
+}
 
 .btn_settings{
-    width:150px;
+    width:120px;
     height:50px;
     border: none;
     border-radius:8px;
-    font-size:25px;
+    font-size:20px;
     font-weight:bold;
     color:#fff;
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-}
-#btn_create{
-    background-color: #f78a38;
-}
-#btn_create:hover{
-    background-color: #f06800;
 }
 #btn_join{
     background-color: #3e9e66;
@@ -129,6 +132,29 @@ footer{
 #btn_join:hover{
     background-color: #438d62;
 }
+#btn_create{
+    margin: 0;
+    margin-right: 10px;
+    background-color: #f78a38;
+}
+#btn_create:hover{
+    background-color: #f06800;
+}
+.loader {
+    display: none;
+    border: 6px solid #e0e0e0;
+    border-top: 6px solid #f78a38; 
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin .5s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 
 .error_container{
     padding: 5px 0;
@@ -145,6 +171,7 @@ footer{
     display: none;
 }
 #error_message{
+
 }
 
 
@@ -152,70 +179,6 @@ footer{
     width:42px;
     height:42px;
 }
-
-
-
-
-#title_n{
-    text-align: center;
-    border-width: 2px;
-    border-radius: 8px;
-    border-style: solid;
-    background-color: #e8d2b3;
-    border-color: #705000;
-    color: #705000;
-}
-#title_i{
-    text-align: center;
-    border-width: 2px;
-    border-radius: 8px;
-    border-style: solid;
-    background-color: #dd844c;
-    border-color: #705000;
-    color: #ffeece;
-}
-#title_m{
-    text-align: center;
-    border-width: 2px;
-    border-radius: 8px;
-    border-style: solid;
-    background-color: #82a29c;
-    border-color: #00685a;
-    color: #00685a;
-}
-#title_b{
-    text-align: center;
-    border-width: 2px;
-    border-radius: 8px;
-    border-style: solid;
-    background-color: #ab3a45;
-    border-color: rgb(94, 0, 16);
-    color: #ffdce8;
-}
-#title_l{
-    text-align: center;
-    border-width: 2px;
-    border-radius: 8px;
-    border-style: solid;
-    background-color: #a3e5ff;
-    border-color: #00d4db;
-    color: #00d4db;
-}
-#title_e{
-    text-align: center;
-    border-width: 2px;
-    border-radius: 8px;
-    border-style: solid;
-    background-color: #b359c5;
-    border-color: #582642;
-    color: #582642;
-}
-.init_title{
-    font-size: 80px;
-    font-style: none;
-    font-weight: normal;
-}
-
 
 
 

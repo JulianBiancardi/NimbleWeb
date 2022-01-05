@@ -69,6 +69,8 @@ main{
 
 .settings_container{
     text-align: right;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .btn_settings{
     width:150px;
@@ -89,9 +91,19 @@ main{
 #btn_start:hover{
     background-color: #f06800;
 }
+#btn_start:disabled{
+    background-color: #808080;
+    cursor:no-drop;
+}
 #btn_copy{
     background-color: #f78a38;
 }
 #btn_copy:hover{
     background-color: #f06800;
+}
+#btn_leave{
+    background-color: #e74e5d;
+}
+#btn_leave:hover{
+    background-color: #ab3a45;
 }

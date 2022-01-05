@@ -1,10 +1,11 @@
-import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG, getCardColor} from './constants.js';
+import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG, getColor, getCardColor, ERROR, INDEX_PAGE, LOBBY_PAGE} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_deckboard1").addEventListener("click", onClickDeck1);
 document.getElementById("btn_deckboard2").addEventListener("click", onClickDeck2);
 document.getElementById("btn_deckboard3").addEventListener("click", onClickDeck3);
 document.getElementById("btn_discard").addEventListener("click", onClickDiscard);
+document.getElementById("btn_move_deck").addEventListener("click", onClickMoveToDeck);
 
 
 const ws = new WebSocket(WEBSOCKET_IP);
@@ -30,6 +31,8 @@ ws.addEventListener("message", ({data}) =>{
         ws.send(JSON.stringify(message));
     }else if(obj_message.method == METHODS.GAME_STATE){
         update_game(obj_message.game, obj_message.users);
+    }else if(obj_message.method == METHODS.OPERATION_STATUS && obj_message.status == ERROR){
+        showErrorPlay();
     }else if(obj_message.method == METHODS.WINNER){
         show_winner(obj_message);
     }
@@ -55,10 +58,16 @@ function onClickDiscard(){
     ws.send(JSON.stringify(message));
 }
 
+function onClickMoveToDeck(){
+    console.log("Do something");
+}
+
 function renderCard(card_view, card_info){
-    card_view.style.backgroundColor = getCardColor(card_info.outer_color);
-    card_view.firstElementChild.style.backgroundColor = getCardColor(card_info.inner_color);
-    card_view.style.border = getCardColor(card_info.inner_color);
+    card_view.style.backgroundColor = getCardColor(card_info.outer_color)[0];
+    card_view.firstElementChild.style.backgroundColor = getCardColor(card_info.inner_color)[0];
+    card_view.style.borderWidth = "8px";
+    card_view.style.borderStyle = "solid";
+    card_view.style.borderColor = getCardColor(card_info.outer_color)[1];
 }
 
 function update_game(game_state, users){
@@ -71,7 +80,11 @@ function update_game(game_state, users){
     //Get the player hand
     let hand_card = game_state.players[player_id].hand_card;
     let hand_card_view =  document.getElementById("hand_card");
+
     renderCard(hand_card_view,hand_card);
+
+    //Update the deck hand color player
+    document.getElementById("deck_hand").style.backgroundColor = getColor(player_id);
 
     //Show the decks board
     for(let i = 0; i < game_state.decks_board.length ;i++){
@@ -91,7 +104,7 @@ function update_game(game_state, users){
             container.innerHTML = `
                 <div class="player">
                     <h2 id="player_name">${users[id].name} (${game_state.players[id].total_cards})</h2>
-                    <img id="img_user" src="../resources/img_user.png"> 
+                    <img class="img_user" src="../resources/img_user.png"> 
                     <div class="cards_container">
                         <div class="card" id="versus_hand_card${id}">
                             <span class="inner_container" id="bad"></span>
@@ -106,6 +119,12 @@ function update_game(game_state, users){
         }
     }
     players_versus.appendChild(fragment);
+}
+
+function showErrorPlay(){
+    let hand_card_view =  document.getElementById("hand_card");
+    hand_card_view.style.animation = "shake 0.5s";
+    hand_card_view.addEventListener("animationend", () =>{hand_card_view.style.removeProperty("animation")});
 }
 
 function show_winner(message){

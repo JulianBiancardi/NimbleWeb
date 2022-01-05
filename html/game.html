@@ -4,6 +4,8 @@
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Nimble Online</title>
+        <link rel="shortcut icon" href="/resources/Logo.ico" type="image/x-icon">
+        <link rel="icon" href="/resources/Logo.ico" type="image/x-icon">
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel="stylesheet" type="text/css" href="../styles/normalize.css"> 
         <link rel="stylesheet" type="text/css" href="../styles/game.css"> 
@@ -15,13 +17,13 @@
                 </div>
                 <div class="board_container">
                     <div class="decks_container">
-                        <button class="deck_board, card" id="btn_deckboard1">
+                        <button class="deck_board card" id="btn_deckboard1">
                             <span class="inner_container"></span>
                         </button>
-                        <button class="deck_board, card" id="btn_deckboard2">
+                        <button class="deck_board card" id="btn_deckboard2">
                             <span class="inner_container"></span>
                         </button>
-                        <button class="deck_board, card" id="btn_deckboard3">
+                        <button class="deck_board card" id="btn_deckboard3">
                             <span class="inner_container"></span>
                         </button>
                     </div>
@@ -29,21 +31,17 @@
                 <div class="player_container">
                     <div class="player">
                         <div class="cards_container">
-                            <div class="deck_hand_container">
-                                <div class="card">
-                                    <label id="total_cards">30</label>
-                                </div>
+                            <button class="control_btn" id="btn_discard"></button>
+                            <div class="card" id="deck_hand">
+                                <label id="total_cards">30</label>
                             </div>
                             <div class="card" id="hand_card">
                                 <span class="inner_container" id="bad"></span>
                             </div>
+                            <button class="control_btn" id="btn_move_deck"></button>
                         </div>
-                        <img id="img_user" src="../resources/img_user.png"> 
-                        <h2 id="player_name">{PlayerName} (XX)</h2>
-                    </div>
-                    <button id="btn_discard">Discard</button>
-                    <div class="winner">
-                        <h2 id="winner_name"></h2>
+                        <img class="img_user" src="../resources/img_user.png"> 
+                        <h2 id="player_name">{PlayerName}</h2>
                     </div>
                 </div>
                 <div class="modal_container">

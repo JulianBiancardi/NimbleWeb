@@ -40,6 +40,7 @@ export const FROM_DISCARD = "discard";
 
 //Status constants
 export const SUCCESS = "success";
+export const ERROR = "error";
 export const ERROR_NAME = "Not valid player name";
 export const ERROR_LOBBY = "Lobby name is not valid";
 export const ERROR_START = "Error start game";
@@ -61,14 +62,15 @@ export function getColor(id){
 }
 
 const card_colors = {
-    'RED': '#ab3a45',
-    'BLUE': '#bfe1e6',
-    'GREEN': '#4e7971',
-    'YELLOW':'#e8d2b3',
-    'PURPLE': '#582642',
-    'ORANGE': '#dd844c',
+    // KEY: [background, border]
+    'RED': ['#ab3a45', '#772b30'],
+    'BLUE': ['#bfe1e6', '#82a8ad'],
+    'GREEN': ['#4e7971', '#2f5858'],
+    'YELLOW':['#e8d2b3', '#d8b68b'],
+    'PURPLE': ['#582642', '#2e1e2a'],
+    'ORANGE': ['#dd844c' , '#b55b38'],
 }
 
 export function getCardColor(key){
-    return card_colors[key];
+    return [card_colors[key][0], card_colors[key][1]];
 }

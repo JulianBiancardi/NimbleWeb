@@ -4,21 +4,15 @@
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>Nimble Online</title>
+        <link rel="shortcut icon" href="/resources/Logo.ico" type="image/x-icon">
+        <link rel="icon" href="/resources/Logo.ico" type="image/x-icon">
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel="stylesheet" type="text/css" href="../styles/normalize.css"> 
         <link rel="stylesheet" type="text/css" href="../styles/index.css"> 
     </head>
     <body>
         <header>
-            <div class="title_container">
-                <label class="init_title" id="title_n">n</label>
-                <label class="init_title" id="title_i">i</label>
-                <label class="init_title" id="title_m">M</label>
-                <label class="init_title" id="title_b">B</label>
-                <label class="init_title" id="title_l">l</label>
-                <label class="init_title" id="title_e">e</label>
-            </div>
-            <button id="btn_rules">Rules</button>
+            <img src="../resources/IMG_nimble_title.png" alt="Nimble Title"> 
         </header>
 
         <main>
@@ -27,11 +21,11 @@
                     <img id="nimble_image" src="../resources/nimblegame.png" alt="Nimble card game"> 
                 </div>
                 <div class="landing_page_settings">
-                    <h1>¡Be <span>quick</span>!</h1>
+                    <h1>Be <span>quick</span></h1>
                     <div class="settings_container" id="join_settings">
                         <h5>Join</h5>
                         <div class="settings_input_container">
-                            <label>Lobby name</label>
+                            <label>Lobby code</label>
                             <input type="text" class="settings_input" id="lobby_name_join"></input>
                         </div>
                         <div class="settings_input_container">
@@ -41,12 +35,15 @@
                         <button  class="btn_settings" id="btn_join">Join</button>
                     </div>
                     <div class="settings_container" id="create_settings">
-                        <h5>Create room</h5>
+                        <h5>Create</h5>
                         <div class="settings_input_container">
                             <label>Player name</label>
                             <input type="text" class="settings_input" id="player_name_create" ></input>
                         </div>
-                        <button class="btn_settings" id="btn_create">Create</button>
+                        <div class="hcontainer">
+                            <button class="btn_settings" id="btn_create">Create</button>
+                            <div class="loader"></div>
+                        </div>
                     </div>
                     
                     <div class="error_container">

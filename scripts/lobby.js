@@ -1,4 +1,4 @@
-import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, LOBBY_PAGE} from './constants.js';
+import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, LOBBY_PAGE, GAME_PAGE} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_start").addEventListener("click", onClickStartGame);
