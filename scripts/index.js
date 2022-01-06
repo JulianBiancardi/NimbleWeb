@@ -53,7 +53,7 @@ function onClickJoin(){
         return;
     }
 
-    let message = {method:METHODS.JOIN, lobby_id:lobby_name, name:player_name, session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.JOIN, lobby_id:lobby_name.toUpperCase(), name:player_name, session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 
