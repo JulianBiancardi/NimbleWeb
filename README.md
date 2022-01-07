@@ -24,7 +24,7 @@ Link de la pagina web: http://nimble.jpmiceli.com.ar
 
  - Imagenes del juego
   
-<img src="readme/loggin.png" alt="drawing" />
-<img src="readme/lobby.png" alt="drawing" />
-<img src="readme/game.png" alt="drawing"/>
+<img src="readme/IMG_Index.png" alt="drawing" />
+<img src="readme/IMG_Lobby.png" alt="drawing" />
+<img src="readme/IMG_Game.png" alt="drawing"/>
 
