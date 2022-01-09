@@ -86,20 +86,14 @@ main{
 }
 
 #btn_start{
-    background-color: #f78a38;
+    background-color: #dd844c;
 }
 #btn_start:hover{
-    background-color: #f06800;
+    background-color: #b55b38;
 }
 #btn_start:disabled{
     background-color: #808080;
     cursor:no-drop;
-}
-#btn_copy{
-    background-color: #f78a38;
-}
-#btn_copy:hover{
-    background-color: #f06800;
 }
 #btn_leave{
     background-color: #e74e5d;

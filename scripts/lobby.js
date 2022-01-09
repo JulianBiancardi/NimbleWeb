@@ -20,7 +20,7 @@ ws.addEventListener("message", ({data}) =>{
     console.log(obj_message);
     if(obj_message.method == METHODS.SESSION_SHARE){
         if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.replace("index.html");
+            window.location.replace(INDEX_PAGE);
         }else{
             console.log("no capo yo ya tengo mi llave");
         }
@@ -32,7 +32,7 @@ ws.addEventListener("message", ({data}) =>{
     }
     else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
-            window.location.replace("game.html");
+            window.location.replace(GAME_PAGE);
         }else{
             console.log(ERROR_START);
         }
@@ -47,7 +47,7 @@ function onClickStartGame(){
 
 function onClickLeave(){
     console.log("Leaving");
-    window.location.replace("index.html");
+    window.location.replace(INDEX_PAGE);
 }
 
 function show_lobby(lobby_info){
@@ -55,7 +55,7 @@ function show_lobby(lobby_info){
     document.getElementById("lobby_id").innerHTML = lobby_info.lobby_id;
 
     //Updates the lobby code for copy link
-    document.getElementById("lobby_id_invite").value = LOBBY_PAGE + "/?lobby_id=" + lobby_info.lobby_id;
+    document.getElementById("lobby_id_invite").value = INDEX_PAGE + "?lobby=" + lobby_info.lobby_id;
 }
 function show_players(players){
     let lobby_players = document.getElementById("lobby_players");

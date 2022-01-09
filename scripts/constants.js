@@ -51,14 +51,26 @@ export const SEG = 1000;
 
 
 //Game constants
-const players_colors = {
-    0: '#ab3a45',
-    1: '#582642',
-    2: '#4e7971',
-    3: '#dd844c',
-}
 export function getColor(id){
-    return players_colors[id];
+    let player_color;
+    switch(parseInt(id)){
+        case 0: 
+            player_color = '#ab3a45';
+            break;
+        case 1: 
+            player_color =  '#582642';
+            break;
+        case 2: 
+            player_color =  '#4e7971';
+            break;
+        case 3: 
+            player_color =  '#dd844c';
+            break;
+        default: 
+            player_color =  '#4e7971';
+            break;
+    }
+    return player_color;
 }
 
 const card_colors = {

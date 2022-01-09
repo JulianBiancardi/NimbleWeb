@@ -4,6 +4,7 @@ import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH,
 document.getElementById("lobby_name_join").setAttribute("maxlength", LOBBY_LENGTH);
 document.getElementById("player_name_join").setAttribute("maxlength", MAX_NAME_LENGTH);
 document.getElementById("player_name_create").setAttribute("maxlength", MAX_NAME_LENGTH);
+setLobby();
 
 //Handlers for buttons
 document.getElementById("btn_join").addEventListener("click", onClickJoin);
@@ -23,13 +24,21 @@ ws.addEventListener("message", ({data}) =>{
         sessionStorage.setItem(SESSION_ID, obj_message.session_id);
     }else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
-            window.location.replace("lobby.html");
+            window.location.replace(LOBBY_PAGE);
         }else{
             showError(obj_message.description);
         }
     }
 })
 
+
+function setLobby(){
+    //View if the lobby parametter is presetn in URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const lobby_code = urlParams.get('lobby')
+    document.getElementById("lobby_name_join").value = lobby_code;
+}
 
 function showError(message){
     document.getElementById("error_message").innerHTML = message;

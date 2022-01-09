@@ -95,7 +95,13 @@ footer{
     filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
 }
 .settings_input_container{
+    display: flex;
+    align-items: center;
+    justify-content: left;
     margin: 10px 0;
+}
+.settings_input_container label{
+    width: 200px;
 }
 .settings_input{
     padding: 9px;
@@ -127,18 +133,18 @@ footer{
     margin-right: auto;
 }
 #btn_join{
-    background-color: #3e9e66;
+    background-color: #4e7971;
 }
 #btn_join:hover{
-    background-color: #438d62;
+    background-color: #2f5858;
 }
 #btn_create{
     margin: 0;
     margin-right: 10px;
-    background-color: #f78a38;
+    background-color: #dd844c;
 }
 #btn_create:hover{
-    background-color: #f06800;
+    background-color: #b55b38;
 }
 .loader {
     display: none;
