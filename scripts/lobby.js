@@ -1,6 +1,7 @@
 import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, LOBBY_PAGE, GAME_PAGE} from './constants.js';
 
 //Handlers for buttons
+document.getElementById("btn_copy").addEventListener("click", onClickCopy);
 document.getElementById("btn_start").addEventListener("click", onClickStartGame);
 document.getElementById("btn_leave").addEventListener("click", onClickLeave);
 
@@ -20,7 +21,7 @@ ws.addEventListener("message", ({data}) =>{
     console.log(obj_message);
     if(obj_message.method == METHODS.SESSION_SHARE){
         if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.replace(INDEX_PAGE);
+            window.location.replace("index.html");
         }else{
             console.log("no capo yo ya tengo mi llave");
         }
@@ -32,13 +33,30 @@ ws.addEventListener("message", ({data}) =>{
     }
     else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
-            window.location.replace(GAME_PAGE);
+            window.location.replace("game.html");
         }else{
             console.log(ERROR_START);
         }
     }
+    else if(obj_message.method == METHODS.GAME_STATE){
+        //We are in game!
+        window.location.replace("game.html");
+    }
 })
 
+function onClickCopy(){
+    let invite_url = document.getElementById("lobby_id_invite");
+
+    invite_url.select();
+    invite_url.setSelectionRange(0, 99999); //For mobile
+
+    //Copy the text inside the text field
+    navigator.clipboard.writeText(invite_url.value);
+
+    let tooltiptext =  document.querySelector(".tooltiptext");
+    tooltiptext.style.animation = "copy 2s";
+    tooltiptext.addEventListener("animationend", () =>{tooltiptext.style.removeProperty("animation")});
+}
 
 function onClickStartGame(){
     let message = {method:METHODS.START, session_id:sessionStorage.getItem(SESSION_ID)};

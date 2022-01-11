@@ -22,7 +22,7 @@ ws.addEventListener("message", ({data}) =>{
     console.log(obj_message);
     if(obj_message.method == METHODS.SESSION_SHARE){
         if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.replace(INDEX_PAGE);
+            window.location.replace("index.html");
         }else{
             console.log("no capo yo ya tengo mi llave");
         }
@@ -134,7 +134,7 @@ function show_winner(message){
     document.getElementById("btn_deckboard2").disabled = true;
     document.getElementById("btn_deckboard3").disabled = true;
     document.getElementById("btn_discard").disabled = true;
-    setTimeout(() =>{ window.location.replace(LOBBY_PAGE); }, 5 * SEG);
+    setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
     document.querySelector(".modal_container").classList.add("show");
 }
 

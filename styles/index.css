@@ -11,6 +11,7 @@ body{
 .hcontainer{
     display: flex;
     align-items: center;
+    justify-content: left;
     flex-direction: row;
 }
 button{
@@ -133,14 +134,15 @@ footer{
     margin-right: auto;
 }
 #btn_join{
+    margin-left: 0px;
+    margin-right: auto;
     background-color: #4e7971;
 }
 #btn_join:hover{
     background-color: #2f5858;
 }
 #btn_create{
-    margin: 0;
-    margin-right: 10px;
+    margin-left: 0px;
     background-color: #dd844c;
 }
 #btn_create:hover{
@@ -149,11 +151,16 @@ footer{
 .loader {
     display: none;
     border: 6px solid #e0e0e0;
-    border-top: 6px solid #f78a38; 
     border-radius: 50%;
     width: 20px;
     height: 20px;
     animation: spin .5s linear infinite;
+}
+#loader_join{
+    border-top: 6px solid #4e7971;
+}
+#loader_create{
+    border-top: 6px solid #dd844c;
 }
 @keyframes spin {
     0% { transform: rotate(0deg); }

@@ -18,7 +18,13 @@
                 <h2 id="lobby_id"></h2>
                 
                 <p>Copy and share this link to invite other players:</p>
-                <input id="lobby_id_invite" readonly="true"></input>
+                <div class="hcontainer">
+                    <input id="lobby_id_invite" readonly="true"></input>
+                    <div class="tooltip">
+                        <button id="btn_copy"></button>
+                        <span class="tooltiptext">Copied!</span>
+                    </div> 
+                </div>
             </div>
 
             <div class="lobby_players_container">

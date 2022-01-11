@@ -24,10 +24,14 @@ ws.addEventListener("message", ({data}) =>{
         sessionStorage.setItem(SESSION_ID, obj_message.session_id);
     }else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
-            window.location.replace(LOBBY_PAGE);
+            window.location.replace("lobby.html");
         }else{
             showError(obj_message.description);
         }
+    }
+    else if(obj_message.method == METHODS.GAME_STATE){
+        //We are in game!
+        window.location.replace("game.html");
     }
 })
 
@@ -44,16 +48,18 @@ function showError(message){
     document.getElementById("error_message").innerHTML = message;
     document.querySelector(".error_container").style.display = 'block';
 
-    let loader = document.querySelector(".loader");
-    //Disable the loader only if it is active
-    if(loader.style.display === "block"){
-        loader.style.display = "none";
+    let loaders = document.querySelector(".loader");
+    //Disable the loaders only if it is active
+    for(loader in loaders){
+        if(loader.style.display === "block"){
+            loader.style.display = "none";
+        }
     }
-
     return;
 }
 
 function onClickJoin(){
+    document.getElementById("loader_join").style.display = 'block';
     let lobby_name = document.getElementById("lobby_name_join").value;
     let player_name = document.getElementById("player_name_join").value;
     
@@ -67,7 +73,7 @@ function onClickJoin(){
 }
 
 function onClickCreate(){
-    document.querySelector(".loader").style.display = 'block';
+    document.getElementById("loader_create").style.display = 'block';
     let player_name = document.getElementById("player_name_create").value;
 
     if(player_name === ""){
