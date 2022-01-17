@@ -145,5 +145,22 @@ document.addEventListener('keypress', (event) => {
     var code = event.code;
     // Alert the key name and key code on keydown
     alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+    switch(name){
+        case "1":
+            onClickDeck1();
+        break;
+        case "2":
+            onClickDeck2();
+        break;
+        case "3":
+            onClickDeck3();
+        break;
+        case "l":
+            onClickDiscard();
+        break;
+        case "j":
+            onClickMoveToDeck();
+        break;
+    }
   }, false);
 
