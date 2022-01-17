@@ -41,15 +41,15 @@ ws.addEventListener("message", ({data}) =>{
 
 
 function onClickDeck1(){
-    let message = {method:METHODS.PLAY, play_from:FROM_HAND, play_to:"0", session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.PLAY, play_to:"0", session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 function onClickDeck2(){
-    let message = {method:METHODS.PLAY, play_from:FROM_HAND, play_to:"1", session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.PLAY, play_to:"1", session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 function onClickDeck3(){
-    let message = {method:METHODS.PLAY, play_from:FROM_HAND, play_to:"2", session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.PLAY, play_to:"2", session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 
@@ -59,7 +59,8 @@ function onClickDiscard(){
 }
 
 function onClickMoveToDeck(){
-    console.log("Do something");
+    let message = {method:METHODS.RECOVER, session_id:sessionStorage.getItem(SESSION_ID)};
+    ws.send(JSON.stringify(message));
 }
 
 function renderCard(card_view, card_info){
@@ -78,8 +79,9 @@ function update_game(game_state, users){
     document.getElementById("player_name").innerHTML = users[player_id].name;
 
     //Get the player hand
-    let hand_card = game_state.players[player_id].hand_card;
-    let hand_card_view =  document.getElementById("hand_card");
+    let hand_card = game_state.players[player_id].discard_deck.top_card;
+    console.log({hand_card})
+    let hand_card_view = document.getElementById("hand_card");
 
     renderCard(hand_card_view,hand_card);
 
@@ -113,7 +115,7 @@ function update_game(game_state, users){
                 </div>
             `;
             fragment.appendChild(container); 
-            let versus_hand_card = game_state.players[id].hand_card;
+            let versus_hand_card = game_state.players[id].discard_deck.top_card;
             let versus_hand_card_view = fragment.getElementById("versus_hand_card" + id);
             renderCard(versus_hand_card_view,versus_hand_card);
         }

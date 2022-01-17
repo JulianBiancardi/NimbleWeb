@@ -33,10 +33,8 @@ export const METHODS = {
     PLAY: "play",
     DISCARD: "discard",
     WINNER: "winner",
+    RECOVER: "recover",
 }
- 
-export const FROM_HAND = "hand";
-export const FROM_DISCARD = "discard";
 
 //Status constants
 export const SUCCESS = "success";
