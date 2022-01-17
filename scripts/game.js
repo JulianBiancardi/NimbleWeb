@@ -1,4 +1,4 @@
-import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG, getColor, getCardColor, ERROR, INDEX_PAGE, LOBBY_PAGE} from './constants.js';
+import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, SEG, getColor, getCardColor, ERROR, INDEX_PAGE, LOBBY_PAGE} from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_deckboard1").addEventListener("click", onClickDeck1);
@@ -139,4 +139,11 @@ function show_winner(message){
     setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
     document.querySelector(".modal_container").classList.add("show");
 }
+
+document.addEventListener('keypress', (event) => {
+    var name = event.key;
+    var code = event.code;
+    // Alert the key name and key code on keydown
+    alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+  }, false);
 
