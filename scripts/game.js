@@ -86,6 +86,7 @@ function update_game(game_state, users){
 
     //Get the player name
     let player_id = game_state.player_number;
+    sessionStorage.setItem(PLAYER_ID, player_id);
     document.getElementById("total_cards").innerHTML = game_state.players[player_id].total_cards;
     document.getElementById("player_name").innerHTML = users[player_id].name;
 
