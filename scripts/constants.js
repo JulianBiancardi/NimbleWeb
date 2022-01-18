@@ -8,8 +8,8 @@ export const WEBSOCKET_IP = WEBSOCKET_HEADER + SERVER_IP;
 const HTTP_HEADER = "http://";
 const DOMAIN_ARG = "nimble.jpmiceli.com.ar";
 export const INDEX_PAGE = HTTP_HEADER + DOMAIN_ARG;
-export const LOBBY_PAGE = HTTP_HEADER + DOMAIN_ARG + "/html/lobby.html";
-export const GAME_PAGE = HTTP_HEADER + DOMAIN_ARG + "/html/game.html";
+export const LOBBY_PAGE = HTTP_HEADER + DOMAIN_ARG + "/lobby";
+export const GAME_PAGE = HTTP_HEADER + DOMAIN_ARG + "/game";
 
 export const MAX_NAME_LENGTH = 12;
 export const LOBBY_LENGTH = 4;
