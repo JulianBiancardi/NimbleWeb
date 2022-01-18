@@ -1,4 +1,4 @@
-import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, LOBBY_PAGE, GAME_PAGE} from './constants.js';
+import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, LOBBY_PAGE, GAME_PAGE, QUIT } from './constants.js';
 
 //Handlers for buttons
 document.getElementById("btn_copy").addEventListener("click", onClickCopy);
@@ -6,6 +6,15 @@ document.getElementById("btn_start").addEventListener("click", onClickStartGame)
 document.getElementById("btn_leave").addEventListener("click", onClickLeave);
 
 const ws = new WebSocket(WEBSOCKET_IP);
+
+let moving_to_game = false;
+
+document.addEventListener("unload", ()=>{
+    if(!moving_to_game){
+        let message = {method:METHODS.QUIT, session_id:sessionStorage.getItem(SESSION_ID)}
+        ws.send(JSON.stringify(message));
+    }
+})
 
 ws.addEventListener("open", () =>{
     let message = {method:METHODS.RECONNECT, session_id:sessionStorage.getItem(SESSION_ID)};
@@ -33,6 +42,7 @@ ws.addEventListener("message", ({data}) =>{
     }
     else if(obj_message.method == METHODS.OPERATION_STATUS){
         if(obj_message.status == SUCCESS){
+            moving_to_game = true;
             window.location.replace("game.html");
         }else{
             console.log(ERROR_START);
