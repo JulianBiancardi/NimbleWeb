@@ -10,6 +10,15 @@ document.getElementById("btn_move_deck").addEventListener("click", onClickMoveTo
 
 const ws = new WebSocket(WEBSOCKET_IP);
 
+let moving_to_lobby = false;
+
+window.addEventListener("beforeunload", ()=>{
+    if(!moving_to_lobby){
+        let message = {method:METHODS.QUIT, session_id:sessionStorage.getItem(SESSION_ID)}
+        ws.send(JSON.stringify(message));
+    }
+})
+
 ws.addEventListener("open", () =>{
     let message = {method:METHODS.RECONNECT, session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
@@ -137,6 +146,8 @@ function show_ending_message(message){
     document.getElementById("btn_deckboard2").disabled = true;
     document.getElementById("btn_deckboard3").disabled = true;
     document.getElementById("btn_discard").disabled = true;
+
+    moving_to_lobby = true;
     setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
     document.querySelector(".modal_container").classList.add("show");
 }
