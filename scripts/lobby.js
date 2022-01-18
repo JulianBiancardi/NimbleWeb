@@ -54,6 +54,17 @@ ws.addEventListener("message", ({data}) =>{
     }
 })
 
+function copyStringToClipboard (str) {
+    var el = document.createElement('textarea');
+    el.value = str;
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+ }
+
 function onClickCopy(){
     let invite_url = document.getElementById("lobby_id_invite");
 
@@ -61,7 +72,8 @@ function onClickCopy(){
     invite_url.setSelectionRange(0, 99999); //For mobile
 
     //Copy the text inside the text field
-    navigator.clipboard.writeText(invite_url.value);
+    copyStringToClipboard(invite_url.value);
+    // navigator.clipboard.writeText(invite_url.value);
 
     let tooltiptext =  document.querySelector(".tooltiptext");
     tooltiptext.style.animation = "copy 2s";
