@@ -39,7 +39,7 @@ ws.addEventListener("message", ({data}) =>{
         let message = {method:METHODS.GAME_STATE, session_id:sessionStorage.getItem(SESSION_ID)};
         ws.send(JSON.stringify(message));
     }else if(obj_message.method == METHODS.GAME_STATE){
-        update_game(obj_message.game, obj_message.users);
+        update_game(obj_message, obj_message.users);
     }else if(obj_message.method == METHODS.OPERATION_STATUS && obj_message.status == ERROR){
         showErrorPlay();
     }else if(obj_message.method == METHODS.WINNER){
@@ -82,10 +82,11 @@ function renderCard(card_view, card_info){
     card_view.style.borderColor = getCardColor(card_info.outer_color)[1];
 }
 
-function update_game(game_state, users){
+function update_game(payload, users){
 
+    let game_state = payload.game;
     //Get the player name
-    let player_id = game_state.player_number;
+    let player_id = payload.player_number;
     sessionStorage.setItem(PLAYER_ID, player_id);
     console.log({player_id});
     document.getElementById("total_cards").innerHTML = game_state.players[player_id].total_cards;
