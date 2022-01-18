@@ -9,7 +9,7 @@ const ws = new WebSocket(WEBSOCKET_IP);
 
 let moving_to_game = false;
 
-document.addEventListener("unload", ()=>{
+window.addEventListener("beforeunload", ()=>{
     if(!moving_to_game){
         let message = {method:METHODS.QUIT, session_id:sessionStorage.getItem(SESSION_ID)}
         ws.send(JSON.stringify(message));
