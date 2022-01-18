@@ -34,7 +34,9 @@ ws.addEventListener("message", ({data}) =>{
     }else if(obj_message.method == METHODS.OPERATION_STATUS && obj_message.status == ERROR){
         showErrorPlay();
     }else if(obj_message.method == METHODS.WINNER){
-        show_winner(obj_message);
+        show_ending_message(obj_message.user.name + " Won the game!" );
+    }else if(obj_message.method == METHODS.TIE){
+        show_ending_message("No one won you piece of losers!")
     }
 })
 
@@ -129,7 +131,7 @@ function showErrorPlay(){
     hand_card_view.addEventListener("animationend", () =>{hand_card_view.style.removeProperty("animation")});
 }
 
-function show_winner(message){
+function show_ending_message(message){
     document.getElementById("modal_player_name").innerHTML = message.user.name + " Won the game!";
     document.getElementById("modal_player_name").style.color = getColor(PLAYER_ID);
     document.getElementById("btn_deckboard1").disabled = true;
@@ -142,9 +144,7 @@ function show_winner(message){
 
 document.addEventListener('keypress', (event) => {
     var name = event.key;
-    var code = event.code;
-    // Alert the key name and key code on keydown
-    alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+
     switch(name){
         case "1":
             onClickDeck1();

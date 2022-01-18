@@ -34,6 +34,7 @@ export const METHODS = {
     DISCARD: "discard",
     WINNER: "winner",
     RECOVER: "recover",
+    TIE: "tie",
 }
 
 //Status constants
