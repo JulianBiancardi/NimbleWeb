@@ -82,7 +82,6 @@ function update_game(game_state, users){
 
     //Get the player hand
     let hand_card = game_state.players[player_id].discard_deck.top_card;
-    console.log({hand_card})
     let hand_card_view = document.getElementById("hand_card");
 
     renderCard(hand_card_view,hand_card);
@@ -132,7 +131,7 @@ function showErrorPlay(){
 }
 
 function show_ending_message(message){
-    document.getElementById("modal_player_name").innerHTML = message.user.name + " Won the game!";
+    document.getElementById("modal_player_name").innerHTML = message;
     document.getElementById("modal_player_name").style.color = getColor(PLAYER_ID);
     document.getElementById("btn_deckboard1").disabled = true;
     document.getElementById("btn_deckboard2").disabled = true;
