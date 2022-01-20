@@ -1,4 +1,4 @@
-import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, geturl, TESTING, MAX_PLAYERS} from './constants.js';
+import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, geturl, MAX_PLAYERS} from './constants.js';
 
 if(!sessionStorage.getItem(SESSION_ID)){
     console.log("missing session id");
@@ -24,9 +24,7 @@ ws.addEventListener("close", () =>{
 ws.addEventListener("message", ({data}) =>{
     const playload = JSON.parse(data);
 
-    if(TESTING){
-        console.log(playload);
-    }
+    console.log(playload);
     
     if(playload.method == METHODS.LOBBY_INFO){
         show_lobby(playload);

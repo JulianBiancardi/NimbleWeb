@@ -1,4 +1,4 @@
-import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH,  geturl, TESTING} from './constants.js';
+import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH,  geturl} from './constants.js';
 
 
 document.getElementById("lobby_name_join").setAttribute("maxlength", LOBBY_LENGTH);
@@ -23,9 +23,7 @@ ws.addEventListener("close", () =>{
 ws.addEventListener("message", ({data}) =>{
     const playload = JSON.parse(data);
 
-    if(TESTING){
-        console.log(playload);
-    }
+    console.log(playload);
     
     if(playload.method == METHODS.UUID){
         sessionStorage.setItem(SESSION_ID, playload.session_id);

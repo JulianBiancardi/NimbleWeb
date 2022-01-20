@@ -1,4 +1,4 @@
-import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP,  getColor, getCardColor, CONTROLS, geturl, ENDING_GAME_MSG_TIME, TESTING} from './constants.js';
+import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP,  getColor, getCardColor, CONTROLS, geturl, ENDING_GAME_MSG_TIME} from './constants.js';
 
 if(!sessionStorage.getItem(SESSION_ID)){
     console.log("missing session id");
@@ -47,9 +47,7 @@ ws.addEventListener("close", () =>{
 ws.addEventListener("message", ({data}) =>{
     const playload = JSON.parse(data);
 
-    if(TESTING){
-        console.log(playload);
-    }
+    console.log(playload);
     
     if(playload.method == METHODS.GAME_STATE){
         update_game(playload);
