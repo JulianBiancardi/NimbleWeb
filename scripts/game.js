@@ -14,7 +14,7 @@ document.getElementById("btn_move_deck").addEventListener("click", onClickMoveTo
 //Controls
 document.addEventListener('keypress', (event) => {
     var name = event.key;
-    switch(name){
+    switch(name.toLowerCase()){
         case CONTROLS.DECK1:
             onClickDeck1();
             break;

@@ -8,13 +8,10 @@ export const WEBSOCKET_IP = WEBSOCKET_HEADER + SERVER_IP;
 export const TESTING = true;
 const HTTP_HEADER = "http://";
 const DOMAIN_ARG = "nimble.jbiancardi.jpmiceli.com.ar";
-export const INDEX_PAGE = HTTP_HEADER + DOMAIN_ARG;
-export const LOBBY_PAGE = HTTP_HEADER + DOMAIN_ARG + "/html/lobby.html";
-export const GAME_PAGE = HTTP_HEADER + DOMAIN_ARG + "/html/game.html";
 export function geturl(file_name){
     if(!TESTING){
-        let start = file_name.indexOf(".html");
-        return HTTP_HEADER + DOMAIN_ARG + "/" + string.substring(start);
+        let end = file_name.indexOf(".html");
+        return HTTP_HEADER + DOMAIN_ARG + "/" + string.substring(0, end);
     }
     return file_name;
 }
