@@ -1,4 +1,4 @@
-import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, geturl, MAX_PLAYERS} from './constants.js';
+import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, geturl, MAX_PLAYERS} from './constants.js';
 
 document.addEventListener("load", () => {
     let id = sessionStorage.getItem(SESSION_ID);
