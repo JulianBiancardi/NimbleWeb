@@ -1,4 +1,4 @@
-import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH, LOBBY_PAGE} from './constants.js';
+import {ERROR_NAME, METHODS, SUCCESS, SESSION_ID, WEBSOCKET_IP, MAX_NAME_LENGTH, LOBBY_LENGTH,  geturl, TESTING} from './constants.js';
 
 
 document.getElementById("lobby_name_join").setAttribute("maxlength", LOBBY_LENGTH);
@@ -10,28 +10,39 @@ setLobby();
 document.getElementById("btn_join").addEventListener("click", onClickJoin);
 document.getElementById("btn_create").addEventListener("click", onClickCreate);
 
+
 const ws = new WebSocket(WEBSOCKET_IP);
 
 ws.addEventListener("open", () =>{
+    let message = {method:METHODS.UUID};
+    ws.send(JSON.stringify(message));
 })
 ws.addEventListener("close", () =>{
     console.log("Connection closed :(");
 })
 ws.addEventListener("message", ({data}) =>{
-    const obj_message = JSON.parse(data);
-    console.log(obj_message);
-    if(obj_message.method == METHODS.SESSION_SHARE){
-        sessionStorage.setItem(SESSION_ID, obj_message.session_id);
-    }else if(obj_message.method == METHODS.OPERATION_STATUS){
-        if(obj_message.status == SUCCESS){
-            window.location.replace("lobby.html");
-        }else{
-            showError(obj_message.description);
-        }
+    const playload = JSON.parse(data);
+
+    if(TESTING){
+        console.log(playload);
     }
-    else if(obj_message.method == METHODS.GAME_STATE){
+    
+    if(playload.method == METHODS.UUID){
+        sessionStorage.setItem(SESSION_ID, playload.session_id);
+    }
+    else if(playload.method == METHODS.ENTERING_LOBBY){
+        window.location.replace(geturl("lobby.html"));
+    }
+    else if(playload.method == METHODS.GAME_STATE){
         //We are in game!
-        window.location.replace("game.html");
+        window.location.replace(geturl("game.html"));
+    }
+    else if(playload.method == METHODS.JOIN_ERROR || playload.method == METHODS.CREATE_ERROR){
+        showError(playload.description);
+    }
+    else{
+        //Unknow method message
+        console.log("Unknow method message");
     }
 })
 
@@ -48,13 +59,13 @@ function showError(message){
     document.getElementById("error_message").innerHTML = message;
     document.querySelector(".error_container").style.display = 'block';
 
-    let loaders = document.querySelector(".loader");
     //Disable the loaders only if it is active
-    for(loader in loaders){
+    let loaders = document.querySelectorAll(".loader");
+    [...loaders].forEach(function(loader) {
         if(loader.style.display === "block"){
             loader.style.display = "none";
         }
-    }
+    });
     return;
 }
 

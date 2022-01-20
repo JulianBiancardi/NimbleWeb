@@ -1,4 +1,9 @@
-import { ERROR_START, METHODS, SUCCESS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, LOBBY_PAGE, GAME_PAGE} from './constants.js';
+import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, geturl, TESTING, MAX_PLAYERS} from './constants.js';
+
+if(!sessionStorage.getItem(SESSION_ID)){
+    console.log("missing session id");
+    window.location.replace(geturl("index.html"));
+}
 
 //Handlers for buttons
 document.getElementById("btn_copy").addEventListener("click", onClickCopy);
@@ -6,43 +11,49 @@ document.getElementById("btn_start").addEventListener("click", onClickStartGame)
 document.getElementById("btn_leave").addEventListener("click", onClickLeave);
 
 const ws = new WebSocket(WEBSOCKET_IP);
+let moving_to_game = false;
+
 
 ws.addEventListener("open", () =>{
     let message = {method:METHODS.RECONNECT, session_id:sessionStorage.getItem(SESSION_ID)};
-    ws.send(JSON.stringify(message));
-    message = {method:METHODS.LOBBY_INFO, session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 })
 ws.addEventListener("close", () =>{
     console.log("Connection closed :(");
 })
 ws.addEventListener("message", ({data}) =>{
-    const obj_message = JSON.parse(data);
-    console.log(obj_message);
-    if(obj_message.method == METHODS.SESSION_SHARE){
-        if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.replace("index.html");
-        }else{
-            console.log("no capo yo ya tengo mi llave");
-        }
+    const playload = JSON.parse(data);
+
+    if(TESTING){
+        console.log(playload);
     }
-    else if(obj_message.method == METHODS.LOBBY_INFO){
-        sessionStorage.setItem(PLAYER_ID, obj_message.player_number);
-        show_lobby(obj_message);
-        show_players(obj_message.users);
+    
+    if(playload.method == METHODS.LOBBY_INFO){
+        show_lobby(playload);
     }
-    else if(obj_message.method == METHODS.OPERATION_STATUS){
-        if(obj_message.status == SUCCESS){
-            window.location.replace("game.html");
-        }else{
-            console.log(ERROR_START);
-        }
+    else if(playload.method == METHODS.ENTERING_GAME){
+        moving_to_game = true;
+        window.location.replace(geturl("game.html"));
     }
-    else if(obj_message.method == METHODS.GAME_STATE){
+    else if(playload.method == METHODS.GAME_STATE){
         //We are in game!
-        window.location.replace("game.html");
+        window.location.replace(geturl("game.html"));
+    }
+    else if(playload.method == METHODS.START_ERROR){
+        console.log("Cant start the game");
+    }
+    else{
+        //Unknow method message
+        console.log("Unknow method message");                
     }
 })
+window.addEventListener("beforeunload", ()=>{
+    if(!moving_to_game){
+        let message = {method:METHODS.QUIT, session_id:sessionStorage.getItem(SESSION_ID)}
+        ws.send(JSON.stringify(message));
+    }
+})
+
 
 function onClickCopy(){
     let invite_url = document.getElementById("lobby_id_invite");
@@ -51,8 +62,9 @@ function onClickCopy(){
     invite_url.setSelectionRange(0, 99999); //For mobile
 
     //Copy the text inside the text field
-    navigator.clipboard.writeText(invite_url.value);
-
+    //window.navigator.clipboard.writeText(invite_url.value);
+    document.execCommand('copy');
+    
     let tooltiptext =  document.querySelector(".tooltiptext");
     tooltiptext.style.animation = "copy 2s";
     tooltiptext.addEventListener("animationend", () =>{tooltiptext.style.removeProperty("animation")});
@@ -64,18 +76,22 @@ function onClickStartGame(){
 }
 
 function onClickLeave(){
-    console.log("Leaving");
-    window.location.replace(INDEX_PAGE);
+    window.location.replace(geturl("index.html"));
 }
 
-function show_lobby(lobby_info){
+function show_lobby(playload){
     //Show the lobby code
-    document.getElementById("lobby_id").innerHTML = lobby_info.lobby_id;
+    document.getElementById("lobby_id").innerHTML = playload.lobby_id;
 
     //Updates the lobby code for copy link
-    document.getElementById("lobby_id_invite").value = INDEX_PAGE + "?lobby=" + lobby_info.lobby_id;
+    document.getElementById("lobby_id_invite").value = INDEX_PAGE + "?lobby=" + playload.lobby_id;
+
+    //Show players quantity
+    document.getElementById("players_quantity").innerHTML = "Players (" + playload.users.length + "/" + MAX_PLAYERS + ")";
+
+    show_players(playload.users, playload.owner);
 }
-function show_players(players){
+function show_players(players, owner){
     let lobby_players = document.getElementById("lobby_players");
 
     //Eliminates the players from the list
@@ -88,7 +104,7 @@ function show_players(players){
     for(let id = 0; id < players.length; id++){
         let container = document.createElement("div");
         container.classList.add("player_container");
-        container.style.backgroundColor =  getColor(id);
+        container.style.backgroundColor =  players[id].color; //change this
         container.innerHTML = `
             <img id="img_user" src="../resources/img_user.png"> 
             <h5>${players[id].name}</h5>
@@ -99,7 +115,7 @@ function show_players(players){
     lobby_players.appendChild(fragment);
 
     //Enable the start button only for the owner
-    if(sessionStorage.getItem(PLAYER_ID) == 0){
+    if(owner){
         document.getElementById("btn_start").disabled = false;
     }
 }

@@ -18,7 +18,7 @@
 
 Este juego, inspirado en el original Nimble, es un trabajo personal para aprender el desarrollo de paginas web, asi como tambien el lenguaje de programación **JavaScript**.
 
-Link de la pagina web: http://nimble.jpmiceli.com.ar
+Link de la pagina web: http://nimble.jbiancardi.jpmiceli.com.ar
 
 ## 2. Imagenes<a name="id2"></a>
 

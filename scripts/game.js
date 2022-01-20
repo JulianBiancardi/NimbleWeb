@@ -1,4 +1,9 @@
-import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP, FROM_HAND, SEG, getColor, getCardColor, ERROR, INDEX_PAGE, LOBBY_PAGE} from './constants.js';
+import { METHODS, PLAYER_ID, SESSION_ID, WEBSOCKET_IP,  getColor, getCardColor, CONTROLS, geturl, ENDING_GAME_MSG_TIME, TESTING} from './constants.js';
+
+if(!sessionStorage.getItem(SESSION_ID)){
+    console.log("missing session id");
+    window.location.replace(geturl("index.html"));
+}
 
 //Handlers for buttons
 document.getElementById("btn_deckboard1").addEventListener("click", onClickDeck1);
@@ -6,9 +11,31 @@ document.getElementById("btn_deckboard2").addEventListener("click", onClickDeck2
 document.getElementById("btn_deckboard3").addEventListener("click", onClickDeck3);
 document.getElementById("btn_discard").addEventListener("click", onClickDiscard);
 document.getElementById("btn_move_deck").addEventListener("click", onClickMoveToDeck);
+//Controls
+document.addEventListener('keypress', (event) => {
+    var name = event.key;
+    switch(name){
+        case CONTROLS.DECK1:
+            onClickDeck1();
+            break;
+        case CONTROLS.DECK2:
+            onClickDeck2();
+            break;
+        case CONTROLS.DECK3:
+            onClickDeck3();
+            break;
+        case CONTROLS.DISCARD:
+            onClickDiscard();
+            break;
+        case CONTROLS.RECOVER:
+            onClickMoveToDeck();
+            break;
+    }
+}, false);
 
 
 const ws = new WebSocket(WEBSOCKET_IP);
+let moving_to_lobby = false;
 
 ws.addEventListener("open", () =>{
     let message = {method:METHODS.RECONNECT, session_id:sessionStorage.getItem(SESSION_ID)};
@@ -18,38 +45,48 @@ ws.addEventListener("close", () =>{
     console.log("Connection closed :(");
 })
 ws.addEventListener("message", ({data}) =>{
-    const obj_message = JSON.parse(data);
-    console.log(obj_message);
-    if(obj_message.method == METHODS.SESSION_SHARE){
-        if(!sessionStorage.getItem(SESSION_ID)){
-            window.location.replace("index.html");
-        }else{
-            console.log("no capo yo ya tengo mi llave");
-        }
-    }else if(obj_message.method == METHODS.RECONNECT){
-        let message = {method:METHODS.GAME_STATE, session_id:sessionStorage.getItem(SESSION_ID)};
-        ws.send(JSON.stringify(message));
-    }else if(obj_message.method == METHODS.GAME_STATE){
-        update_game(obj_message.game, obj_message.users);
-    }else if(obj_message.method == METHODS.OPERATION_STATUS && obj_message.status == ERROR){
+    const playload = JSON.parse(data);
+
+    if(TESTING){
+        console.log(playload);
+    }
+    
+    if(playload.method == METHODS.GAME_STATE){
+        update_game(playload);
+    }
+    else if(playload.method == METHODS.INVALID_MOVE_ERROR){
         showErrorPlay();
-    }else if(obj_message.method == METHODS.WINNER){
-        show_winner(obj_message);
+    }
+    else if(playload.method == METHODS.WINNER){
+        moving_to_lobby = true;
+        show_winner(playload);
+    }
+    else if(playload.method == METHODS.TIE){
+        //show_ending_message("No one won you piece of losers!")
+    }
+    else{
+        //Unknow method message
+        console.log("Unknow method message"); 
+    }
+})
+window.addEventListener("beforeunload", ()=>{
+    if(!moving_to_lobby){
+        let message = {method:METHODS.QUIT, session_id:sessionStorage.getItem(SESSION_ID)}
+        ws.send(JSON.stringify(message));
     }
 })
 
 
-
 function onClickDeck1(){
-    let message = {method:METHODS.PLAY, play_from:FROM_HAND, play_to:"0", session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.PLAY, play_to:"0", session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 function onClickDeck2(){
-    let message = {method:METHODS.PLAY, play_from:FROM_HAND, play_to:"1", session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.PLAY, play_to:"1", session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 function onClickDeck3(){
-    let message = {method:METHODS.PLAY, play_from:FROM_HAND, play_to:"2", session_id:sessionStorage.getItem(SESSION_ID)};
+    let message = {method:METHODS.PLAY, play_to:"2", session_id:sessionStorage.getItem(SESSION_ID)};
     ws.send(JSON.stringify(message));
 }
 
@@ -59,7 +96,8 @@ function onClickDiscard(){
 }
 
 function onClickMoveToDeck(){
-    console.log("Do something");
+    let message = {method:METHODS.RECOVER, session_id:sessionStorage.getItem(SESSION_ID)};
+    ws.send(JSON.stringify(message));
 }
 
 function renderCard(card_view, card_info){
@@ -70,25 +108,27 @@ function renderCard(card_view, card_info){
     card_view.style.borderColor = getCardColor(card_info.outer_color)[1];
 }
 
-function update_game(game_state, users){
-
+function update_game(playload){
+    let game = playload.game;
+    let users = playload.users;
+    let player_id = playload.player_number;
+    
     //Get the player name
-    let player_id = sessionStorage.getItem(PLAYER_ID);
-    document.getElementById("total_cards").innerHTML = game_state.players[player_id].total_cards;
+    document.getElementById("total_cards").innerHTML = game.players[player_id].total_cards;
     document.getElementById("player_name").innerHTML = users[player_id].name;
 
     //Get the player hand
-    let hand_card = game_state.players[player_id].hand_card;
+    let hand_card = game.players[player_id].discard_deck.top_card;
     let hand_card_view =  document.getElementById("hand_card");
 
     renderCard(hand_card_view,hand_card);
 
     //Update the deck hand color player
-    document.getElementById("deck_hand").style.backgroundColor = getColor(player_id);
+    document.getElementById("deck_hand").style.backgroundColor = users[player_id].color;
 
     //Show the decks board
-    for(let i = 0; i < game_state.decks_board.length ;i++){
-        let deck_board = game_state.decks_board[i].top_card;
+    for(let i = 0; i < game.decks_board.length ;i++){
+        let deck_board = game.decks_board[i].top_card;
         let deck_board_view = document.getElementById("btn_deckboard" + (i + 1));
         renderCard(deck_board_view,deck_board);
     }
@@ -103,7 +143,7 @@ function update_game(game_state, users){
             container.classList.add("player_container");
             container.innerHTML = `
                 <div class="player">
-                    <h2 id="player_name">${users[id].name} (${game_state.players[id].total_cards})</h2>
+                    <h2 id="player_name">${users[id].name} (${game.players[id].total_cards})</h2>
                     <img class="img_user" src="../resources/img_user.png"> 
                     <div class="cards_container">
                         <div class="card" id="versus_hand_card${id}">
@@ -113,7 +153,7 @@ function update_game(game_state, users){
                 </div>
             `;
             fragment.appendChild(container); 
-            let versus_hand_card = game_state.players[id].hand_card;
+            let versus_hand_card = game.players[id].discard_deck.top_card;
             let versus_hand_card_view = fragment.getElementById("versus_hand_card" + id);
             renderCard(versus_hand_card_view,versus_hand_card);
         }
@@ -134,7 +174,8 @@ function show_winner(message){
     document.getElementById("btn_deckboard2").disabled = true;
     document.getElementById("btn_deckboard3").disabled = true;
     document.getElementById("btn_discard").disabled = true;
-    setTimeout(() =>{ window.location.replace("lobby.html"); }, 5 * SEG);
+    setTimeout(() =>{ window.location.replace(geturl("lobby.html")); }, ENDING_GAME_MSG_TIME);
     document.querySelector(".modal_container").classList.add("show");
 }
+
 

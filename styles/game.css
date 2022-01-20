@@ -130,24 +130,30 @@ main{
 
 .control_btn{
     align-self: center;
+    margin-bottom: 10px;
     width: 60px;
     height: 60px;
     border: none;
-    border-radius: 10px;
+    border-radius: 50px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;
-    background-color: #747474;
+    background-color: rgba(0,0,0,.3);
 }
 .control_btn:hover{
-    background-color: #525252;
+    animation: select_control 0.1s forwards;
 }
 .control_btn#btn_discard{
     background-image: url('/resources/IMG_discard.png');
 }
-
 .control_btn#btn_move_deck{
     background-image: url('/resources/IMG_movedeck.png');
+}
+@keyframes select_control {
+    to{
+        scale: 1.15;
+        border-radius: 10px;
+    }
 }
 
 .modal_container{
