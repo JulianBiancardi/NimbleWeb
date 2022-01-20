@@ -86,7 +86,7 @@ function show_lobby(playload){
     document.getElementById("lobby_id").innerHTML = playload.lobby_id;
 
     //Updates the lobby code for copy link
-    document.getElementById("lobby_id_invite").value = INDEX_PAGE + "?lobby=" + playload.lobby_id;
+    document.getElementById("lobby_id_invite").value = geturl("index.html") + "?lobby=" + playload.lobby_id;
 
     //Show players quantity
     document.getElementById("players_quantity").innerHTML = "Players (" + playload.users.length + "/" + MAX_PLAYERS + ")";
