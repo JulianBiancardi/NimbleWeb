@@ -6,12 +6,12 @@ export const WEBSOCKET_IP = WEBSOCKET_HEADER + SERVER_IP;
 
 //Pages constants
 export const TESTING = true;
-const HTTP_HEADER = "http://";
-const DOMAIN_ARG = "nimble.jbiancardi.jpmiceli.com.ar";
+// const HTTP_HEADER = "http://";
+// const DOMAIN_ARG = "nimble.jbiancardi.jpmiceli.com.ar";
 export function geturl(file_name){
     if(!TESTING){
         let end = file_name.indexOf(".html");
-        return HTTP_HEADER + DOMAIN_ARG + "/" + file_name.substring(0, end);
+        return window.location.origin + "/" + file_name.substring(0, end);
     }
     return file_name;
 }
