@@ -1,9 +1,15 @@
 import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, geturl, MAX_PLAYERS} from './constants.js';
 
-if(!sessionStorage.getItem(SESSION_ID)){
-    console.log("missing session id");
-    window.location.replace(geturl("index.html"));
-}
+document.addEventListener("load", () => {
+    let id = sessionStorage.getItem(SESSION_ID);
+    console.log({id}); 
+    
+    if(!id){
+        console.log("missing session id");
+        // window.location.replace(geturl("index.html"));
+    }
+})
+
 
 //Handlers for buttons
 document.getElementById("btn_copy").addEventListener("click", onClickCopy);
