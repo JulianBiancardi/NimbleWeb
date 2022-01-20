@@ -1,12 +1,10 @@
 import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, INDEX_PAGE, geturl, MAX_PLAYERS} from './constants.js';
 
 document.addEventListener("load", () => {
-    console.log("Hola");
     let id = sessionStorage.getItem(SESSION_ID);
-    console.log({id}); 
     if(!id){
         console.log("missing session id");
-        // window.location.replace(geturl("index.html"));
+        window.location.replace(geturl("index.html"));
     }
 })
 
