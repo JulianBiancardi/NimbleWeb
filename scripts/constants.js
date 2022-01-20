@@ -11,7 +11,7 @@ const DOMAIN_ARG = "nimble.jbiancardi.jpmiceli.com.ar";
 export function geturl(file_name){
     if(!TESTING){
         let end = file_name.indexOf(".html");
-        return HTTP_HEADER + DOMAIN_ARG + "/" + string.substring(0, end);
+        return HTTP_HEADER + DOMAIN_ARG + "/" + file_name.substring(0, end);
     }
     return file_name;
 }
