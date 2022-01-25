@@ -57,10 +57,11 @@ ws.addEventListener("message", ({data}) =>{
     }
     else if(playload.method == METHODS.WINNER){
         moving_to_lobby = true;
-        show_winner(playload);
+        show_ending_message(playload.user.name + " won the game!");
     }
     else if(playload.method == METHODS.TIE){
-        //show_ending_message("No one won you piece of losers!")
+        moving_to_lobby = true;
+        show_ending_message("No one won :(");
     }
     else{
         //Unknow method message
@@ -165,7 +166,7 @@ function showErrorPlay(){
     hand_card_view.addEventListener("animationend", () =>{hand_card_view.style.removeProperty("animation")});
 }
 
-function show_winner(message){
+function show_ending_message(message){
     document.getElementById("modal_player_name").innerHTML = message.user.name + " Won the game!";
     document.getElementById("modal_player_name").style.color = getColor(PLAYER_ID);
     document.getElementById("btn_deckboard1").disabled = true;
