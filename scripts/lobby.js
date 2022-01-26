@@ -1,4 +1,4 @@
-import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, geturl, MAX_PLAYERS, CONTROLS} from './constants.js';
+import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, geturl, MAX_PLAYERS, CONTROLS, changeControl} from './constants.js';
 
 document.addEventListener("load", () => {
     let id = sessionStorage.getItem(SESSION_ID);
@@ -137,23 +137,14 @@ function onClickOpenSettings(){
 }
 function onClickCloseSettings(){
     console.log("Cerrando settings");
-    CONTROLS.DECK1 = changeControl("deck_1_key_input", CONTROLS.DECK1);
-    CONTROLS.DECK2 = changeControl("deck_2_key_input", CONTROLS.DECK2);
-    CONTROLS.DECK3 = changeControl("deck_3_key_input", CONTROLS.DECK3);
-    CONTROLS.DISCARD = changeControl("discard_key_input", CONTROLS.DISCARD);
-    CONTROLS.RECOVER = changeControl("recover_key_input", CONTROLS.RECOVER);
+    changeControl(document.getElementById("deck_1_key_input").value, "deck1");
+    changeControl(document.getElementById("deck_2_key_input").value, "deck2");
+    changeControl(document.getElementById("deck_3_key_input").value, "deck3");
+    changeControl(document.getElementById("discard_key_input").value, "discard");
+    changeControl(document.getElementById("recover_key_input").value, "recover");
     document.querySelector(".lobby_modal_container").classList.remove("show");
 }
 
-function changeControl(inputId, prevValue){
-    let value = document.getElementById(inputId).value;
-    if(value.length != 1){
-        console.log(value + " no tiene tamaño 1, cancelando");
-        return prevValue;
-    }
-    console.log(" Seteando " + value);
-    return value;
-}
 
 function onDeckOneControlChange(e){
     console.log({e})

@@ -62,6 +62,39 @@ export const ERROR_LOBBY = "Lobby name is not valid";
 //Game constants
 export const MAX_PLAYERS = 4;
 
+export function changeControl(newVal, id){
+    if(newVal.length() != 1){
+        console.log("Invalid newVal: " + newVal);     
+        return false;
+    }
+    switch(id){
+        case "deck1":
+            CONTROLS.DECK1 = newVal;
+            console.log("Deck1: " + newVal);      
+        break;
+        case "deck2":
+            CONTROLS.DECK2 = newVal;
+            console.log("Deck2: " + newVal);     
+        break;
+        case "deck3":
+            CONTROLS.DECK3 = newVal;
+            console.log("Deck3: " + newVal);     
+        break;
+        case "discard":
+            CONTROLS.DISCARD = newVal;
+            console.log("Discard: " + newVal);     
+        break;
+        case "recover":
+            CONTROLS.RECOVER = newVal;
+            console.log("Recover: " + newVal);     
+        break;
+        default:
+            console.log("Default :(");     
+            return false;
+    }
+    return true;
+}
+
 export var CONTROLS = {
     DECK1: "1",
     DECK2: "2",
