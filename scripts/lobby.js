@@ -1,4 +1,4 @@
-import { METHODS, SESSION_ID, WEBSOCKET_IP, getColor, geturl, MAX_PLAYERS, CONTROLS, changeControl} from './constants.js';
+import { METHODS, SESSION_ID, WEBSOCKET_IP, geturl, MAX_PLAYERS, CONTROLS, CONTROLS_IDS} from './constants.js';
 
 document.addEventListener("load", () => {
     let id = sessionStorage.getItem(SESSION_ID);
@@ -6,6 +6,11 @@ document.addEventListener("load", () => {
         console.log("missing session id");
         window.location.replace(geturl("index.html"));
     }
+    sessionStorage.setItem(CONTROLS_IDS.DECK1, sessionStorage.getItem(CONTROLS_IDS.DECK1) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DECK1));
+    sessionStorage.setItem(CONTROLS_IDS.DECK2, sessionStorage.getItem(CONTROLS_IDS.DECK2) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DECK2));
+    sessionStorage.setItem(CONTROLS_IDS.DECK3, sessionStorage.getItem(CONTROLS_IDS.DECK3) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DECK3));
+    sessionStorage.setItem(CONTROLS_IDS.DISCARD, sessionStorage.getItem(CONTROLS_IDS.DISCARD) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DISCARD));
+    sessionStorage.setItem(CONTROLS_IDS.RECOVER, sessionStorage.getItem(CONTROLS_IDS.RECOVER) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.RECOVER));
 })
 
 
@@ -16,6 +21,10 @@ document.getElementById("btn_leave").addEventListener("click", onClickLeave);
 document.getElementById("btn_open_settings").addEventListener("click", onClickOpenSettings);
 document.getElementById("btn_close_settings").addEventListener("click", onClickCloseSettings);
 document.getElementById("deck_1_key_input").setAttribute("maxlength", 1);
+document.getElementById("deck_2_key_input").setAttribute("maxlength", 1);
+document.getElementById("deck_3_key_input").setAttribute("maxlength", 1);
+document.getElementById("discard_key_input").setAttribute("maxlength", 1);
+document.getElementById("recover_key_input").setAttribute("maxlength", 1);
 
 const ws = new WebSocket(WEBSOCKET_IP);
 let moving_to_game = false;
@@ -127,18 +136,28 @@ function show_players(players, owner){
 function onClickOpenSettings(){
     console.log("Abriendo settings");
     document.querySelector(".lobby_modal_container").classList.add("show");
-    document.getElementById("deck_1_key_input").value = CONTROLS.DECK1;
-    document.getElementById("deck_2_key_input").value = CONTROLS.DECK2;
-    document.getElementById("deck_3_key_input").value = CONTROLS.DECK3;
-    document.getElementById("discard_key_input").value = CONTROLS.DISCARD;
-    document.getElementById("recover_key_input").value = CONTROLS.RECOVER;
+    document.getElementById("deck_1_key_input").value = sessionStorage.getItem(CONTROLS_IDS.DECK1);
+    document.getElementById("deck_2_key_input").value = sessionStorage.getItem(CONTROLS_IDS.DECK2);
+    document.getElementById("deck_3_key_input").value = sessionStorage.getItem(CONTROLS_IDS.DECK3);
+    document.getElementById("discard_key_input").value = sessionStorage.getItem(CONTROLS_IDS.DISCARD);
+    document.getElementById("recover_key_input").value = sessionStorage.getItem(CONTROLS_IDS.RECOVER);
 }
 function onClickCloseSettings(){
     console.log("Cerrando settings");
-    changeControl(document.getElementById("deck_1_key_input").value, "deck1");
-    changeControl(document.getElementById("deck_2_key_input").value, "deck2");
-    changeControl(document.getElementById("deck_3_key_input").value, "deck3");
-    changeControl(document.getElementById("discard_key_input").value, "discard");
-    changeControl(document.getElementById("recover_key_input").value, "recover");
+    changeControl(document.getElementById("deck_1_key_input").value, CONTROLS_IDS.DECK1);
+    changeControl(document.getElementById("deck_2_key_input").value, CONTROLS_IDS.DECK2);
+    changeControl(document.getElementById("deck_3_key_input").value, CONTROLS_IDS.DECK3);
+    changeControl(document.getElementById("discard_key_input").value, CONTROLS_IDS.DISCARD);
+    changeControl(document.getElementById("recover_key_input").value, CONTROLS_IDS.RECOVER);
     document.querySelector(".lobby_modal_container").classList.remove("show");
+}
+
+export function changeControl(newVal, key){
+    newVal = newVal.toLowerCase();
+    if(newVal.length != 1){
+        console.log("Invalid newVal: " + newVal);     
+        return false;
+    }
+    sessionStorage.setItem(key, newVal);
+    return true;
 }

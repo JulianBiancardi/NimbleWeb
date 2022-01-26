@@ -15,19 +15,19 @@ document.getElementById("btn_move_deck").addEventListener("click", onClickMoveTo
 document.addEventListener('keypress', (event) => {
     var name = event.key;
     switch(name.toLowerCase()){
-        case CONTROLS.DECK1:
+        case sessionStorage.getItem(CONTROLS_IDS.DECK1):
             onClickDeck1();
             break;
-        case CONTROLS.DECK2:
+        case sessionStorage.getItem(CONTROLS_IDS.DECK2):
             onClickDeck2();
             break;
-        case CONTROLS.DECK3:
+        case sessionStorage.getItem(CONTROLS_IDS.DECK3):
             onClickDeck3();
             break;
-        case CONTROLS.DISCARD:
+        case sessionStorage.getItem(CONTROLS_IDS.DISCARD):
             onClickDiscard();
             break;
-        case CONTROLS.RECOVER:
+        case sessionStorage.getItem(CONTROLS_IDS.RECOVER):
             onClickMoveToDeck();
             break;
     }
