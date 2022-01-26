@@ -35,7 +35,7 @@ import { METHODS, SESSION_ID, WEBSOCKET_IP, geturl, MAX_PLAYERS, CONTROLS, CONTR
     if(recoverControl == null){
         recoverControl = CONTROLS.RECOVER;
     }
-    sessionStorage.setItem(CONTROLSrecoverControlIDS.RECOVER,  recoverControl);
+    sessionStorage.setItem(CONTROLS_IDS.RECOVER,  recoverControl);
 
 // })
 
