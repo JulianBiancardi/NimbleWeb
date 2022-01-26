@@ -1,6 +1,6 @@
 import { METHODS, SESSION_ID, WEBSOCKET_IP, geturl, MAX_PLAYERS, CONTROLS, CONTROLS_IDS} from './constants.js';
 
-document.addEventListener("load", () => {
+// document.addEventListener("load", () => {
     let id = sessionStorage.getItem(SESSION_ID);
     if(!id){
         console.log("missing session id");
@@ -37,7 +37,7 @@ document.addEventListener("load", () => {
     }
     sessionStorage.setItem(CONTROLSrecoverControlIDS.RECOVER,  recoverControl);
 
-})
+// })
 
 
 //Handlers for buttons
