@@ -144,8 +144,3 @@ function onClickCloseSettings(){
     changeControl(document.getElementById("recover_key_input").value, "recover");
     document.querySelector(".lobby_modal_container").classList.remove("show");
 }
-
-
-function onDeckOneControlChange(e){
-    console.log({e})
-}

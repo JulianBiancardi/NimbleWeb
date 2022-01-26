@@ -63,7 +63,7 @@ export const ERROR_LOBBY = "Lobby name is not valid";
 export const MAX_PLAYERS = 4;
 
 export function changeControl(newVal, id){
-    if(newVal.length() != 1){
+    if(newVal.length != 1){
         console.log("Invalid newVal: " + newVal);     
         return false;
     }
