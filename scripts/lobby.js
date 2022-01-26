@@ -10,6 +10,7 @@ document.addEventListener("load", () => {
     if(deck1Control == null){
         deck1Control = CONTROLS.DECK1;
     }
+    console.log("Seteando el nuevo deck1 a " + deck1Control);
     sessionStorage.setItem(CONTROLS_IDS.DECK1,  deck1Control);
     
     let deck2Control = sessionStorage.getItem(CONTROLS_IDS.DECK2);
