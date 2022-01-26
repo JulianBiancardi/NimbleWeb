@@ -176,3 +176,33 @@ main{
     75% { opacity: 1; }
     100% { opacity: 0; visibility: hidden;}
 }
+
+.lobby_modal_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    background-color: rgba(0,0,0,.3);
+}
+.lobby_modal_container.show{ 
+    opacity: 1;
+}
+.lobby_modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 600px;
+    max-width: 100%;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    filter: drop-shadow(2px 4px 4px rgba(20,20,20,0.4));
+}

@@ -13,6 +13,8 @@ document.addEventListener("load", () => {
 document.getElementById("btn_copy").addEventListener("click", onClickCopy);
 document.getElementById("btn_start").addEventListener("click", onClickStartGame);
 document.getElementById("btn_leave").addEventListener("click", onClickLeave);
+document.getElementById("btn_open_settings").addEventListener("click", onClickOpenSettings);
+document.getElementById("btn_close_settings").addEventListener("click", onClickCloseSettings);
 
 const ws = new WebSocket(WEBSOCKET_IP);
 let moving_to_game = false;
@@ -120,5 +122,11 @@ function show_players(players, owner){
     if(owner){
         document.getElementById("btn_start").disabled = false;
     }
+}
+function onClickOpenSettings(){
+    document.querySelector(".lobby_modal_container").classList.add("show");
+}
+function onClickCloseSettings(){
+    document.querySelector(".lobby_modal_container").classList.remove("show");
 }
 
