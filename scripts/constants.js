@@ -62,7 +62,7 @@ export const ERROR_LOBBY = "Lobby name is not valid";
 //Game constants
 export const MAX_PLAYERS = 4;
 
-export const CONTROLS = {
+export var CONTROLS = {
     DECK1: "1",
     DECK2: "2",
     DECK3: "3",
