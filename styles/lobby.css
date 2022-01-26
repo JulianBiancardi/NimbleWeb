@@ -138,7 +138,12 @@ main{
     background-color: #ab3a45;
 }
 
-
+#btn_open_settings{
+    background-color: #072ca7;
+}
+#btn_open_settings:hover{
+    background-color: #071c63;
+}
 
 .tooltip{
     position: relative;
@@ -190,9 +195,15 @@ main{
     pointer-events: none;
     background-color: rgba(0,0,0,.3);
 }
+
 .lobby_modal_container.show{ 
     opacity: 1;
 }
+
+.lobby_modal_container.hide{ 
+    opacity: 0;
+}
+
 .lobby_modal{
     display: flex;
     justify-content: center;

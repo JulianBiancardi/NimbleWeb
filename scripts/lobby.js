@@ -128,5 +128,6 @@ function onClickOpenSettings(){
 }
 function onClickCloseSettings(){
     document.querySelector(".lobby_modal_container").classList.remove("show");
+    document.querySelector(".lobby_modal_container").classList.add("hide");
 }
 
