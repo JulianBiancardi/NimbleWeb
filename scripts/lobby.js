@@ -15,9 +15,7 @@ document.getElementById("btn_start").addEventListener("click", onClickStartGame)
 document.getElementById("btn_leave").addEventListener("click", onClickLeave);
 document.getElementById("btn_open_settings").addEventListener("click", onClickOpenSettings);
 document.getElementById("btn_close_settings").addEventListener("click", onClickCloseSettings);
-document.getElementById("deck_1_key_input").setAttribute("minlength", 1);
 document.getElementById("deck_1_key_input").setAttribute("maxlength", 1);
-document.getElementById("deck_1_key_input").addEventListener("change", onDeckOneControlChange);
 
 const ws = new WebSocket(WEBSOCKET_IP);
 let moving_to_game = false;
