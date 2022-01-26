@@ -200,10 +200,6 @@ main{
     opacity: 1;
 }
 
-.lobby_modal_container.hide{ 
-    opacity: 0;
-}
-
 .lobby_modal{
     display: flex;
     justify-content: center;

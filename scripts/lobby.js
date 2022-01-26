@@ -124,10 +124,11 @@ function show_players(players, owner){
     }
 }
 function onClickOpenSettings(){
+    console.log("Abriendo settings");
     document.querySelector(".lobby_modal_container").classList.add("show");
 }
 function onClickCloseSettings(){
+    console.log("Cerrando settings");
     document.querySelector(".lobby_modal_container").classList.remove("show");
-    document.querySelector(".lobby_modal_container").classList.add("hide");
 }
 
