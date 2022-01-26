@@ -6,11 +6,36 @@ document.addEventListener("load", () => {
         console.log("missing session id");
         window.location.replace(geturl("index.html"));
     }
-    sessionStorage.setItem(CONTROLS_IDS.DECK1, sessionStorage.getItem(CONTROLS_IDS.DECK1) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DECK1));
-    sessionStorage.setItem(CONTROLS_IDS.DECK2, sessionStorage.getItem(CONTROLS_IDS.DECK2) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DECK2));
-    sessionStorage.setItem(CONTROLS_IDS.DECK3, sessionStorage.getItem(CONTROLS_IDS.DECK3) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DECK3));
-    sessionStorage.setItem(CONTROLS_IDS.DISCARD, sessionStorage.getItem(CONTROLS_IDS.DISCARD) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.DISCARD));
-    sessionStorage.setItem(CONTROLS_IDS.RECOVER, sessionStorage.getItem(CONTROLS_IDS.RECOVER) == null ? CONTROLS.DECK1 : sessionStorage.getItem(CONTROLS_IDS.RECOVER));
+    let deck1Control = sessionStorage.getItem(CONTROLS_IDS.DECK1);
+    if(deck1Control == null){
+        deck1Control = CONTROLS.DECK1;
+    }
+    sessionStorage.setItem(CONTROLS_IDS.DECK1,  deck1Control);
+    
+    let deck2Control = sessionStorage.getItem(CONTROLS_IDS.DECK2);
+    if(deck2Control == null){
+        deck2Control = CONTROLS.DECK2;
+    }
+    sessionStorage.setItem(CONTROLS_IDS.DECK2,  deck2Control);
+    
+    let deck3Control = sessionStorage.getItem(CONTROLS_IDS.DECK3);
+    if(deck3Control == null){
+        deck3Control = CONTROLS.DECK3;
+    }
+    sessionStorage.setItem(CONTROLS_IDS.DECK3,  deck3Control);
+    
+    let discardControl = sessionStorage.getItem(CONTROLS_IDS.DISCARD);
+    if(discardControl == null){
+        discardControl = CONTROLS.DISCARD;
+    }
+    sessionStorage.setItem(CONTROLS_IDS.DISCARD,  discardControl);
+    
+    let recoverControl = sessionStorage.getItem(CONTROLS_IDS.RECOVER);
+    if(recoverControl == null){
+        recoverControl = CONTROLS.RECOVER;
+    }
+    sessionStorage.setItem(CONTROLSrecoverControlIDS.RECOVER,  recoverControl);
+
 })
 
 
