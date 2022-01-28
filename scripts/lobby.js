@@ -1,6 +1,6 @@
 import { METHODS, SESSION_ID, WEBSOCKET_IP, geturl, MAX_PLAYERS, CONTROLS, CONTROLS_IDS} from './constants.js';
 
-// document.addEventListener("load", () => {
+document.addEventListener("DOMContentLoad", () => {
     let id = sessionStorage.getItem(SESSION_ID);
     if(!id){
         console.log("missing session id");
@@ -10,7 +10,6 @@ import { METHODS, SESSION_ID, WEBSOCKET_IP, geturl, MAX_PLAYERS, CONTROLS, CONTR
     if(deck1Control == null){
         deck1Control = CONTROLS.DECK1;
     }
-    console.log("Seteando el nuevo deck1 a " + deck1Control);
     sessionStorage.setItem(CONTROLS_IDS.DECK1,  deck1Control);
     
     let deck2Control = sessionStorage.getItem(CONTROLS_IDS.DECK2);
@@ -37,7 +36,7 @@ import { METHODS, SESSION_ID, WEBSOCKET_IP, geturl, MAX_PLAYERS, CONTROLS, CONTR
     }
     sessionStorage.setItem(CONTROLS_IDS.RECOVER,  recoverControl);
 
-// })
+})
 
 
 //Handlers for buttons
