@@ -167,7 +167,7 @@ function showErrorPlay(){
 }
 
 function show_ending_message(message){
-    document.getElementById("modal_player_name").innerHTML = message.user.name + " Won the game!";
+    document.getElementById("modal_player_name").innerHTML = message;
     document.getElementById("modal_player_name").style.color = getColor(PLAYER_ID);
     document.getElementById("btn_deckboard1").disabled = true;
     document.getElementById("btn_deckboard2").disabled = true;
